@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            float: right;
+            padding: 0px 10px;
+            height: 60px;
+        }
+        #header * {
+            margin-right: 15px;
+        }
+        #header a {
+            font-size: 13px;
+            text-decoration: none;
+            color: #000000;
+        }
+        #header a:hover {
+            text-decoration: underline;
+            color: grey;
+        } 
+        .clear {
+            clear: both;
+        }
+        #container {
+            margin-top: 135px;
+            text-align: center;
+            min-height: 450px;
+        }
+        #logo {
+            margin-bottom: 20px;
+        }
+        #search {
+            margin:auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 600px;
+            border-radius: 25px;
+            border: 1px solid lightgrey;
+        }
+        #search * {
+            margin: 3px;
+        }
+        #search input {
+            border: none;
+            height: 30px;
+            width: 500px;
+            padding: 5px;
+            font-size: 20px;
+        }
+        #search input:focus {
+            outline:none;
+        }
+        #btn {
+            margin-top: 30px; 
+            padding: 5px;
+        }
+        #btn input {
+            margin: 5px;
+            padding: 10px 5px 10px 5px;
+            width: 150px;
+            border:none;
+            font-size:14px;
+            color: grey;
+            border-radius: 5px;
+        }
+        #btn input:hover {
+            border: 1px solid lightgrey;
+            margin-top:-2px;
+            margin-bottom:-2px;
+        }
+        #lang {
+            margin-top: 25px;
+            font-size: 13px;
+        }
+        #lang a {
+            margin-right: 8px;
+            text-decoration: none;
+        }
+        #footer {
+            background-color: #F2F2F2;
+            float: left;
+            width: 100%;
+            position:absolute;
+            bottom: 0;
+        }
+        #footer p {
+            color:grey;
+            border-bottom:1px inset rgb(199, 198, 198);
+            padding: 12px;
+            padding-left: 20px;
+            font-size: 14px;
+        }
+        #links {
+            margin-top:10px;
+            min-height: 30px;
+        }
+        #footer a {
+            padding: 10px;
+            margin-left: 10px;
+            font-size: 14px;
+            text-decoration: none;
+            color: rgb(105, 105, 105);
+        } 
+        #links-left {
+            float: left;
+        }
+        #links-right {
+            float: right;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <a href="https://gmail.com">Gmail</a>
+        <a href="https://google.com/images">Images</a>
+        <img src="images/tiles.png" alt=""/>
+        <img src="images/dp.png" alt=""/>
+    </div>
+    <div class="clear"></div>
+    <div id="container">
+        <img id="logo" src="images/google-logo.png" alt="google"/>
+        <div id="search">
+            <img src="images/lense.png" alt=""/>
+            <input type="text"/>
+            <a href=""><img src="images/mic.png" alt=""/></a>
+        </div>
+        <div id="btn">
+            <input type="button" value="Google Search"/>
+            <input type="button" value="I'm Feeling Lucky"/>
+        </div>
+        <div id="lang">
+            Google offered in:
+            <a href="" >हिन्दी</a>
+            <a href="" >বাংলা</a>
+            <a href="" >తెలుగు</a>
+            <a href="" >मराठी</a>
+            <a href="" >தமிழ்</a>
+            <a href="" >ગુજરાતી</a>
+            <a href="" >ಕನ್ನಡ</a>
+            <a href="" >മലയാളം</a>
+            <a href="" >ਪੰਜਾਬੀ</a>
+        </div>
+    </div>
+    <div id="footer">
+        <p>India</p>
+        <div id="links">
+            <div id="links-left">
+                <a href="">Advertising</a>
+                <a href="">Bussiness</a>
+                <a href="">About</a>
+                <a href="">How Search Works</a>
+            </div>
+            <div id="links-right">
+                <a href="">Privacy</a>
+                <a href="">Terms</a>
+                <a href="">Settings</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
