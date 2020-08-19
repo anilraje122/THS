@@ -1,0 +1,106 @@
+<!-- 
+    Generate HTML table with JS (10x10)
+        - When a cell is clicked, all multiples of that cell should be **
+        - Replace ** with small images and apply style to table
+        - It should look something like minesweeper game
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    
+    <!-- CSS -->
+    <style type="text/css">
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .header {
+            margin: 0 auto;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 50px;
+            color: #109b96;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #createTableBtn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            border-color: #ff5722;
+            font-size: 12px;
+            background-color:#ff5722;
+            color: white;
+        }
+        #createTableBtn:hover  {
+            background-color:  #dd2c00;
+            border-color: #dd2c00;
+            cursor: pointer;
+            outline:none;
+        }
+        #createTableBtn:focus {
+            outline:none;
+        }
+        a {
+            text-decoration: none;
+        }
+        table {
+            border: 5px ridge grey;
+        }
+    </style>
+
+    <!-- JS -->
+    <script type="text/javascript">
+    var maxRows = 10;
+    var maxCols = 10;
+    
+    // creating the table with maxRows and maxCols
+    function createTable() {
+        var tableHtml = '<table id="myTable">';
+        var cellIdCount = 1;
+        for(var row=0; row<maxRows; row++) {
+            tableHtml += '<tr>'
+            for(var col=0; col<maxCols; col++) {
+                tableHtml += `<td><a id="cell-${cellIdCount}" href="javascript:void(0);" onclick="changeStar(this);"><img src="images/mine1.png" width="50" height="50"/></a></td>`;
+                cellIdCount++;
+            }
+            tableHtml += '</tr>'
+        }
+        tableHtml += '</table>'
+        document.getElementById('outputDiv').innerHTML = tableHtml;
+    }
+
+    // When a cell is clicked, all multiples of that cell should be **
+    var everRan = false;
+    function changeStar(elem) {
+        var cellId = elem.getAttribute('id').split('-')[1];
+        var maxCells = maxRows * maxCols;
+        if(everRan) {
+            createTable();
+        }
+        for(var count=1; count<=maxCells; count++) {
+            if(cellId%count == 0 || count%cellId == 0) {
+                document.getElementById(`cell-${count}`).innerHTML = '<img src="images/mine2.png" width="50" height="50"/>';
+                document.getElementById(`cell-${cellId}`).innerHTML = '<img src="images/mine2.png" width="50" height="50"/>';
+                everRan = true;
+            }
+        }
+    }
+    </script>
+</head>
+<body onload="createTable();">
+    <div class="header">
+        <h2>Minesweeper - HTML/CSS/JS</h2>
+        <button id="createTableBtn" onclick="createTable();">Reset Mines</button>
+    </div>
+    <div class="container">
+        <div id="outputDiv">
+        </div>
+    </div>
+</body>
+</html>
