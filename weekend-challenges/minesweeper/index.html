@@ -21,8 +21,7 @@
             margin: 0 auto;
             text-align: center;
             padding: 10px;
-            margin-bottom: 50px;
-            color: #109b96;
+            color: #fa7d09;
         }
         .container {
             display: flex;
@@ -48,14 +47,48 @@
         }
         a {
             text-decoration: none;
+            color: green;
         }
-        table {
-            border: 5px ridge grey;
+        #myTable {
+            border: 1px solid crimson;
+            height: 602px;
+            width: 602px;
+            border-spacing: 0;
+        }
+        #myTable tr {
+            height: 60px;
+            width: 600px;
+        }
+        #myTable td {
+            border: 1px solid crimson;
+            text-align: center;
+            width: 50px;
+            height: 53px;
+            padding-top:4px;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+        .footer{
+            margin: 40px auto;
+            text-align: center;
         }
     </style>
+</head>
+<body onload="createTable();">
+    <div class="header">
+        <h2>Minesweeper</h2>
+    </div>
+    <div class="container">
+        <div id="outputDiv">
+        </div>
+    </div>
+    <div class="footer">
+        <button id="createTableBtn" onclick="createTable();">Reset Mines</button>
+    </div>
+</body>
 
-    <!-- JS -->
-    <script type="text/javascript">
+<!-- JS -->
+<script type="text/javascript">
     var maxRows = 10;
     var maxCols = 10;
     
@@ -66,7 +99,7 @@
         for(var row=0; row<maxRows; row++) {
             tableHtml += '<tr>'
             for(var col=0; col<maxCols; col++) {
-                tableHtml += `<td><a id="cell-${cellIdCount}" href="javascript:void(0);" onclick="changeStar(this);"><img src="images/mine1.png" width="50" height="50"/></a></td>`;
+                tableHtml += `<td style="width:50px; height: 50px;"><a id="cell-${cellIdCount}" href="javascript:void(0);" onclick="changeStar(this);">${cellIdCount}</a></td>`;
                 cellIdCount++;
             }
             tableHtml += '</tr>'
@@ -85,22 +118,11 @@
         }
         for(var count=1; count<=maxCells; count++) {
             if(cellId%count == 0 || count%cellId == 0) {
-                document.getElementById(`cell-${count}`).innerHTML = '<img src="images/mine2.png" width="50" height="50"/>';
-                document.getElementById(`cell-${cellId}`).innerHTML = '<img src="images/mine2.png" width="50" height="50"/>';
+                document.getElementById(`cell-${count}`).innerHTML = '<img src="images/mine2.png" width="50px" height="50px"/>';
+                document.getElementById(`cell-${cellId}`).innerHTML = '<img src="images/mine2.png" width="50px" height="50px"/>';
                 everRan = true;
             }
         }
     }
     </script>
-</head>
-<body onload="createTable();">
-    <div class="header">
-        <h2>Minesweeper - HTML/CSS/JS</h2>
-        <button id="createTableBtn" onclick="createTable();">Reset Mines</button>
-    </div>
-    <div class="container">
-        <div id="outputDiv">
-        </div>
-    </div>
-</body>
 </html>
