@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            /* very important */
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 2em;
+        }
+        .container {
+            /* Make margin responsive */
+            margin: 20px auto;
+            /* Make width responsive */
+            max-width: 800px;
+        }
+        .section {
+            background-color: cadetblue;
+            border: 2px solid crimson;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .section p {
+            text-align: justify;
+        }
+        #section-2 {
+            float: left;
+            width: 50%;
+        }
+        #section-3 {
+            float: right;
+            width: 50%;
+        }
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="section-1" class="section">
+            <h1>Section 1</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum excepturi, debitis atque obcaecati exercitationem mollitia sed, laborum placeat aut incidunt fugit! Iure, numquam ut eum saepe suscipit voluptas, ex minima deleniti voluptatem culpa debitis, nobis expedita deserunt dolorem nesciunt tenetur eveniet aliquid enim dolores tempore excepturi sit vero delectus! Asperiores.</p>
+        </div>
+        <div id="section-2" class="section">
+            <h1>Section 2</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum excepturi, debitis atque obcaecati exercitationem mollitia sed, laborum placeat aut incidunt fugit! Iure, numquam ut eum saepe suscipit voluptas, ex minima deleniti voluptatem culpa debitis, nobis expedita deserunt dolorem nesciunt tenetur eveniet aliquid enim dolores tempore excepturi sit vero delectus! Asperiores.</p>
+        </div>
+        <div id="section-3" class="section">
+            <h1>Section 3</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum excepturi, debitis atque obcaecati exercitationem mollitia sed, laborum placeat aut incidunt fugit! Iure, numquam ut eum saepe suscipit voluptas, ex minima deleniti voluptatem culpa debitis, nobis expedita deserunt dolorem nesciunt tenetur eveniet aliquid enim dolores tempore excepturi sit vero delectus! Asperiores.</p>
+        </div>
+        <div class="clear"></div>
+        <div id="section-4" class="section">
+            <h1>Section 4</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum excepturi, debitis atque obcaecati exercitationem mollitia sed, laborum placeat aut incidunt fugit! Iure, numquam ut eum saepe suscipit voluptas, ex minima deleniti voluptatem culpa debitis, nobis expedita deserunt dolorem nesciunt tenetur eveniet aliquid enim dolores tempore excepturi sit vero delectus! Asperiores.</p>
+        </div>
+    </div>
+</body>
+</html>

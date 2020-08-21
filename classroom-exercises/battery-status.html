@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Status - Web API</title>
+    <style>
+        .container {
+            margin: 0 auto;
+            text-align: center;
+            padding: 10px;
+        }
+        #progress-div {
+            margin-bottom: 30px;
+        }
+        #battery-div {
+            margin: 0 auto;
+            width: 300px;
+            height: 90px;
+        }
+        #battery-long {
+            float: left;
+            border: 3px solid black;
+            border-right:none;
+            height: 100%;
+            width: 92%;
+        }
+        #battery-short {
+            float: left;
+            height: 100%;
+            width: 6%;
+        }
+        .battery-tip {
+            height: 33.5%
+        }
+        #battery-tip1{
+            border: 3px solid black;
+            border-top:none;
+            border-right:none;
+        }
+        #battery-tip2{
+            border:none;
+            border-right: 3px solid black;
+            /* background-color:green; */
+        }
+        #battery-tip3{
+            border: 3px solid black;
+            border-right:none;
+            border-bottom:none;
+        }
+        #battery-long .battery-long-colors {
+            float: left;
+            height: 100%;
+            width: 25%;
+        }
+        /* #battery-long-red {
+            background-color: red;
+        }
+        #battery-long-orange {
+            background-color: orange;
+        }
+        #battery-long-yellow {
+            background-color: rgba(255, 255, 0, 0.808);
+        }
+        #battery-long-green {
+            background-color: green;
+        } */
+    </style>
+    <script>
+
+        // get batter status from browser
+        function main() {
+            navigator.getBattery().then(function(battery) {
+
+                // update battery level automatically to the latest
+                // battery.addEventListener('levelchange', function() {
+                    var batLevel = battery.level * 100;
+                    // var batLevel = 80;
+                    document.getElementById('output-div').innerText = Math.floor(batLevel) + "%";
+                    document.getElementById('batteryProgress').value = Math.floor(batLevel);
+
+                    console.log(batLevel);
+                    if(batLevel >= 80 && batLevel <= 100) {
+                        fillBattery(['battery-tip2', 'battery-long-green', 'battery-long-yellow', 'battery-long-orange', 'battery-long-red'], 'green');
+                    }
+                    if(batLevel >= 60 && batLevel < 80) {
+                        fillBattery(['battery-long-yellow', 'battery-long-orange', 'battery-long-red'], 'yellow');
+                        resetBattery(['battery-tip2', 'battery-long-green']);
+                    }
+                    if(batLevel >= 30 && batLevel < 60) {
+                        fillBattery(['battery-long-orange', 'battery-long-red'], 'orange');
+                        resetBattery(['battery-tip2', 'battery-long-green', 'battery-long-yellow']);
+                    }
+                    if(batLevel >= 0 && batLevel < 30) {
+                        fillBattery(['battery-long-red'], 'red');
+                        resetBattery(['battery-tip2', 'battery-long-green', 'battery-long-yellow', 'battery-long-orange']);
+                    }
+                    
+                // });
+            });
+        }
+    
+        // fill battery colors
+        function fillBattery(divIds, color){
+            console.log(divIds, color);
+            for(divId in divIds) {
+                document.getElementById(divIds[divId]).style.backgroundColor = color;
+            }
+        }
+
+        // reset battery colors
+        function resetBattery(divIds){
+            console.log(divIds);
+            for(divId in divIds) {
+                document.getElementById(divIds[divId]).style.backgroundColor = 'none';
+            }
+        }
+    
+        // Load all DOM objects
+        document.addEventListener("DOMContentLoaded", main);
+    </script>
+</head>
+<body onload="main();">
+    <div class="container">
+        <div id="progress-div">
+            <h1>Current battery status of your system is <span id="output-div">0%</span></h1>
+            <label for="batter">Battery status:</label>
+            <progress id="batteryProgress" value="0" max="100"> 32% </progress>
+        </div>
+        <div id="battery-div">
+            <div id="battery-long">
+                <div id="battery-long-red" class="battery-long-colors"></div>
+                <div id="battery-long-orange" class="battery-long-colors"></div>
+                <div id="battery-long-yellow" class="battery-long-colors"></div>
+                <div id="battery-long-green" class="battery-long-colors"></div>
+            </div>
+            <div id="battery-short">
+                <div id="battery-tip1" class="battery-tip"></div>
+                <div id="battery-tip2" class="battery-tip"></div>
+                <div id="battery-tip3" class="battery-tip"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

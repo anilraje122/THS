@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Shapes</title>
+    <style>
+        body {
+            padding: 25px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .container h2 {
+            padding: 10px;
+            background-color:darkgoldenrod;
+            border: 2px solid orangered;
+            color: white;
+        }
+        #rectangle-div {
+            height: 50px;
+            width: 100px;
+            background-color:coral;
+        }
+    </style>
+    <script>
+        function reshape() {
+            setInterval(function() {
+                console.log('im in');
+                var ele = document.getElementById('rectangle-div')
+                var style = getComputedStyle(ele);
+                var h = Number(style.height.split('px')[0]) + 1;
+                var w = Number(style.width.split('px')[0]) + 2;
+                console.log(h, w);
+                if (w <= 800) {
+                    document.getElementById('rectangle-div').style.height = h + 'px';
+                    document.getElementById('rectangle-div').style.width = w + 'px';
+                    console.log(h, w);
+                }
+            }, 100);
+        }
+
+        // Load DOM obects
+        window.addEventListener('DOMContentLoaded', reshape);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Magic Shapes</h2>
+        <div id="rectangle-div">
+
+        </div>
+    </div>
+</body>
+</html>

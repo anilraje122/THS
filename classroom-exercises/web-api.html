@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Web API</title>
+    <style>
+        .container {
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Current battery status of your system is <span id="output-div">90%</span></h1>
+        <br><br>
+        <label for="batter">Battery status:</label>
+        <progress id="batteryProgress" value="32" max="100"> 32% </progress>
+    </div>
+</body>
+<script>
+
+    function main() {
+        navigator.getBattery().then(function(battery) {
+            battery.addEventListener('levelchange', function() {
+                var batVal = battery.level * 100;
+                document.getElementById('output-div').innerText = Math.floor(batVal) + "%";
+                document.getElementById('batteryProgress').value = Math.floor(batVal);
+            });
+        });
+    }
+
+    // Load all DOM objects
+    document.addEventListener("DOMContentLoaded", main);
+
+</script>
+</html>
