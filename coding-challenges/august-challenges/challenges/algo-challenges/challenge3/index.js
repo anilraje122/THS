@@ -18,6 +18,7 @@ How to run this program : npm run challenge3
 
 getInput = () => {
     let readLineSync = require('readline-sync');
+    console.log("\n-- Multiples of 11 --")
     while(true) {
         let input = Number(readLineSync.question("\nEnter the number : "));
         if(isMultipleOfEleven(input)) {

@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "challenge1": "node challenge1/index.js",
-    "challenge2": "node challenge2/index.js",
-    "challenge3": "node challenge3/index.js"
+    "challenge1": "node challenges/algo-challenges/challenge1/index.js",
+    "challenge2": "node challenges/algo-challenges/challenge2/index.js",
+    "challenge3": "node challenges/algo-challenges/challenge3/index.js"
   },
   "author": "",
   "license": "ISC",

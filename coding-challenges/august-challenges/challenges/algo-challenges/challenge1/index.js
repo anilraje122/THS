@@ -57,7 +57,8 @@ isNarcissistic = (num) => {
 getInput = () => {
     let inputArr = [];
     let readLineSync = require('readline-sync');
-    let inputArrLen = Number(readLineSync.question("Enter array length, n : "));
+    console.log("\n-- Prime and Narcissistic numbers --")
+    let inputArrLen = Number(readLineSync.question("\nEnter array length, n : "));
     while(inputArrLen > 0) {
         inputArr.push(Number(readLineSync.question("Enter a number : ")));
         inputArrLen--;
