@@ -11,6 +11,8 @@ Narcissistic number : An n-digit number that is the sum of the nth powers of its
 Eg: 370 = 3^3 + 7^3 + 0^3. here 3 is length of the input number
 Eg: 1634 = 1^4 + 6^4 + 3^4 + 4^4. here 4 is length of the input number
 
+How to run this program : npm run challenge1
+
 *****/
 
 isPrime = (num) => {
@@ -61,7 +63,7 @@ countAndRemove = (inputArr) => {
     let eleToRemArr = [];
     
     // print original input array
-    console.log(`Input array : ${inputArr}`);
+    console.log(`\nInput array : ${inputArr}`);
 
     for(let i=0; i<inputArr.length; i++) {
         if(isPrime(inputArr[i])) {
