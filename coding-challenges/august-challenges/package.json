@@ -1,0 +1,15 @@
+{
+  "name": "august-challenges",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "challenge1": "node challenge1/index.js",
+    "challenge2" : "npm run challenge2/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
