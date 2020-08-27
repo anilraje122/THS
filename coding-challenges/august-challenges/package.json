@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "challenge1": "node challenges/algo-challenges/challenge1/index.js",
-    "challenge2": "node challenges/algo-challenges/challenge2/index.js",
-    "challenge3": "node challenges/algo-challenges/challenge3/index.js"
+    "challenge3": "node challenges/algo-challenges/challenge3/index.js",
+    "challenge5": "node challenges/algo-challenges/challenge5/index.js"
   },
   "author": "",
   "license": "ISC",
