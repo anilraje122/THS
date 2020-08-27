@@ -20,13 +20,8 @@ How to run this program : npm run challenge5
 
 ***********************************************/
 
-// get user inputs
-getInput = () => {
-    let readLineSync = require('readline-sync');
-    let inputStr = readLineSync.question("Enter a string : ");
-    let inputKey = readLineSync.question("Enter key : ");
-    console.log(inputStr, inputKey);
-}
+let inputS = '';
+let inputK = '';
 
 // convert input string to ascii decimal
 strToAscii = (inputStr) => {
@@ -64,56 +59,27 @@ pad8Bit = (binStr) => {
     return binStr;
 }
 
-// encrypt the input string with the key
-encryptDecrypt = (inputStr, inputKey) => {
-
-    // converting input string to ascii array
-    let inputStrAsciiArr = strToAscii(inputStr);
-    let inputStrBinArr = [];
-
-    // converting input key to ascii array
-    let inputKeyAsciiArr = strToAscii(inputKey);
-    let inputKeyBinArr = [];
-
-    for(let i=0; i<inputStrAsciiArr.length; i++) {
-        inputStrBinArr.push(decToBin(inputStrAsciiArr[i]));
-    }
-
-    for(let i=0; i<inputKeyAsciiArr.length; i++) {
-        inputKeyBinArr.push(decToBin(inputKeyAsciiArr[i]));
-    }
-    return xor32bit(inputStrBinArr, inputKeyBinArr);
-}
-
-// find XOR of binary input string and binary key
+// find XOR of 32 bit binary input string and 8 binary key
 xor32bit = (inputStrBinArr, inputKeyBinArr ) => {
     let strArrLen = inputStrBinArr.length;
     let keyArrLen = inputKeyBinArr.length;
     let sum = [];
-    if(strArrLen != keyArrLen) {
-        var maxLen = (strArrLen > keyArrLen)?strArrLen:keyArrLen;
-    }
-
-    // equalising 32 bits for the inputs
-    while(strArrLen < maxLen ) {
-        inputStrBinArr.unshift('00000000');
-        strArrLen++;
-    }
-    while(keyArrLen < maxLen ) {
-        inputKeyBinArr.unshift('00000000');
+    let outputArr = [];
+    let outputStrSum = '';
+  
+    // padding key array with the same key set to match with input string array length
+    while(keyArrLen < strArrLen) {
+        inputKeyBinArr.unshift(inputKeyBinArr[0]);
         keyArrLen++;
     }
 
-    console.log(inputStrBinArr, inputKeyBinArr); // printing inputs
-    
-    let outputArr = [];
-    let outputStrSum = '';
     // iterating through binary input string array and binary input key array and finding XOR of both
     for(let digitIndex = (inputStrBinArr.length - 1); digitIndex>=0; digitIndex--) { 
         outputStrSum = calcXor(inputStrBinArr[digitIndex], inputKeyBinArr[digitIndex])
         outputArr.push(outputStrSum);
     }
-    return outputArr.reverse();
+    outputArr = outputArr.reverse();
+    return outputArr;
 }
 
 // calculate XOR of two 8 bit binary inputs
@@ -129,7 +95,67 @@ calcXor = (binStr1, binStr2) => {
     return sumArr.reverse().join('');
 }
 
-console.log(encryptDecrypt('ani','x'));
+// convert binary string to decimal
+binToDec = (binStr) => {
+    let sum = 0;
+    let muliplicand = 0;
+    for(let bitIndex = (binStr.length - 1); bitIndex>=0; bitIndex--) {
+        sum += (Number(binStr[bitIndex]) * (2**muliplicand));
+        muliplicand++;
+    }
+    return sum;
+}
 
-// now write binary to decimal calc 
+// encrypt the input string with the key provided
+encryptDecrypt = (inputStr, inputKey) => {
 
+    let inputStrBinArr = [];
+    let inputKeyBinArr = [];
+    let xorOutputArr = [];
+    let encryptedString = '';
+    let encryptedStringArr = []; // just to display the error
+
+    // converting input string to ascii array
+    let inputStrAsciiArr = strToAscii(inputStr);
+    
+    // converting input key to ascii array
+    let inputKeyAsciiArr = strToAscii(inputKey);
+
+    // converting ascii array to bin array
+    for(let i=0; i<inputStrAsciiArr.length; i++) {
+        inputStrBinArr.push(decToBin(inputStrAsciiArr[i]));
+    }
+    for(let i=0; i<inputKeyAsciiArr.length; i++) {
+        inputKeyBinArr.push(decToBin(inputKeyAsciiArr[i]));
+    }
+
+    // getting XOR output of string input and key
+    xorOutputArr = xor32bit(inputStrBinArr, inputKeyBinArr);
+
+    // convert the XOR output to ASCII charcters
+    for(let i=0; i<xorOutputArr.length; i++) {
+        encryptedString += String.fromCharCode(binToDec(xorOutputArr[i]));
+        encryptedStringArr.push(String.fromCharCode(binToDec(xorOutputArr[i])));
+    }
+        
+    // console.log(encryptedStringArr); // Unable to print few ASCII chars. Eg: \u000f. Sample key : m
+    return encryptedString;
+}
+
+// get user inputs
+getInput = () => {
+    let readLineSync = require('readline-sync');
+    readLineSync.setDefaultOptions({keepWhitespace: true});
+    console.log("\n-- XOR Cipher --")
+    inputS = readLineSync.question("\nEnter a String : ");
+    inputK = readLineSync.question("Enter a Key : ");
+    if(inputK.length !== 1) {
+        console.log('\nKey should be a single digit or alphabet! Program exiting..');
+        return;
+    }
+    let encryptedString = encryptDecrypt(inputS, inputK);
+    console.log('\nEncrypted String : '+ encryptDecrypt(inputS, inputK));
+    console.log('Decrypted String : '+ encryptDecrypt(encryptedString, inputK));
+}
+
+getInput();
