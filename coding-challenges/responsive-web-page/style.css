@@ -1,0 +1,35 @@
+
+/* For screen size less than 500px */
+@media only screen and (max-width:500px) {
+    body {
+        background-color: #dd2c00;
+    }
+}
+
+/* For screen size greater than 500px and less than 600px */
+@media (min-width:500px) and (max-width:600px) {
+    body {
+        background-color: #81b214;
+    }
+}
+
+/* For screen size greater than 600px and less than 900px */
+@media (min-width:600px) and (max-width:900px) {
+    body {
+        background-color:#00bcd4;
+    }
+}
+
+/* For screen size greater than 900px and less than 1080px */
+@media (min-width:900px) and (max-width:1080px) {
+    body {
+        background-color:#ffc93c;
+    }
+}
+
+/* For screen size greater than 1080px */
+@media only screen and (min-width:1080px) {
+    body {
+        background-color:#5c2a9d;
+    }
+}
