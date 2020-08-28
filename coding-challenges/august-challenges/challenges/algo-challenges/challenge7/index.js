@@ -18,6 +18,7 @@ Sample Output 2 :
 
 ***********************************************/
 
+// get user inputs and display the output
 main = () => {
     let readLineSync = require('readline-sync');
     console.log("\n-- Split Strings --")
@@ -26,6 +27,7 @@ main = () => {
     resStrArr.forEach(element => console.log(element));
 }
 
+// split input string into even and odd sections
 splitStr = (inputStr) => {
     let evenStr = '';
     let oddStr = '';
@@ -39,6 +41,7 @@ splitStr = (inputStr) => {
     return [paddStr(evenStr), paddStr(oddStr)]
 }
 
+// padd 000 and 111 to input string
 paddStr = (str) => {
     str = '000' + str + '111';
     return str;
