@@ -4,6 +4,17 @@ Write An Algorithm to check if a given number is in the following series:
 4,16,64,256,1024,4096,16384.,......., 4^N
 Note : Output will be yes/no
 
+Sample input : 
+n : 5
+Sample output : 
+No
+
+Sample input : 
+n : 16
+Sample output : 
+Yes
+
+
 ***********************************************/
 
 // get user inputs and display the output
