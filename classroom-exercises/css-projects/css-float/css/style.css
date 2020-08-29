@@ -31,6 +31,10 @@ p {
     padding: 0px 20px;
 }
 
+.clear {
+    clear: both;
+}
+
 /* Navbar styling */
 #navbar {
     background: #333333;
@@ -138,3 +142,27 @@ p {
 #company-info .info-content p {
     padding-bottom: 20px;
 }
+
+/* Services */
+
+.tile {
+    float: left;
+    width: 33.33%;
+    padding: 30px;
+    text-align: center;
+}
+
+.tile h3 {
+    padding-top: 30px;
+}
+
+/* Footer */
+
+#homepage-footer {
+    text-align: center;
+    background: #333333;
+    color: white;
+    font-size: 12px;
+    padding: 1px;
+}
+
