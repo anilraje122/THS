@@ -72,3 +72,69 @@ p {
     background: url('../images/cover.jpg') no-repeat center center/cover;
     height: 400px;
 }
+
+#landingpage .landingpage-content {
+    color: white;
+    text-align: center;
+    padding-top: 130px;
+}
+
+#landingpage .landingpage-content h1 {
+    font-size: 40px;
+    line-height: 1.2em;
+}
+
+.text-primary {
+    color: crimson;
+}
+
+.lead {
+    font-size: 20px;
+    padding-bottom: 20px;
+    line-height: 1.7em;;
+}
+
+.btn, .btn:visited {
+    display: inline-block;
+    font-size: 15px;
+    color: white;
+    background: crimson;
+    padding: 5px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: rgb(255, 0, 51);
+}
+
+/* Company info */
+
+#company-info {
+    height: 400px;
+
+}
+
+#company-info .info-img {
+    float: left;
+    width: 50%;
+    background: url('../images/office.jpg') no-repeat center center/cover;
+    min-height: 100%;
+}
+
+#company-info .info-content {
+    float: right;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    padding: 50px;
+}
+
+.bg-dark {
+    background: #333333;
+    color: white;
+}
+
+#company-info .info-content p {
+    padding-bottom: 20px;
+}
