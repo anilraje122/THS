@@ -18,11 +18,11 @@ a {
 }
 
 h1, h2, h3, h4 {
-    padding-bottom: 20px;
+    padding-bottom: 5px;
 }
 
 p {
-    margin: 10px 0px;
+    margin: 5px 0px;
 }
 
 .container {
@@ -33,6 +33,10 @@ p {
 
 .clear {
     clear: both;
+}
+
+.py-3 {
+    padding: 30px;
 }
 
 /* Navbar styling */
@@ -48,7 +52,8 @@ p {
 
 #navbar h1 {
     float: left;
-    padding-top: 20px;
+    padding-top: 5px;
+    font-size:20px;
 }
 
 #navbar ul {
@@ -63,7 +68,7 @@ p {
 #navbar ul li a {
     /* KB pending */
     display: block; 
-    padding: 20px;
+    padding: 5px 20px;
     text-align:center;
 }
 
@@ -132,6 +137,7 @@ p {
     height: 100%;
     text-align: center;
     padding: 50px;
+    padding-top: 80px;
 }
 
 .bg-dark {
@@ -144,6 +150,10 @@ p {
 }
 
 /* Services */
+
+#services {
+    padding: 20px 0px;
+}
 
 .tile {
     float: left;
@@ -158,11 +168,82 @@ p {
 
 /* Footer */
 
-#homepage-footer {
+#homepage-footer, #contact-footer, #about-footer {
     text-align: center;
     background: #333333;
     color: white;
     font-size: 12px;
     padding: 1px;
 }
+
+#contact-footer {
+    position: absolute;
+    width: 100%;
+    bottom:0;
+}
+
+/* About us page */
+
+#about-info {
+    padding: 50px 0px;
+}
+
+#about-info .info-right {
+    float: right;
+    width: 50%;
+    min-height: 100%;
+}
+
+#about-info .info-right img {
+    margin: auto;
+    display: block;
+    width: 60%;
+}
+
+#about-info .info-left {
+    float: left;
+    width: 50%;
+    min-height: 50%;
+}
+
+.testimonial {
+    padding: 10px 0px;
+}
+
+/* Contact form */
+
+#contact-form {
+    height: 100%;
+}
+
+#contact-form form {
+    margin-top: 30px;
+}
+
+#contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+#contact-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#contact-form input, #contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #dddddd;
+}
+
+#contact-form input:focus, #contact-form textarea:focus {
+    outline: none;
+}
+
+#contact-form textarea {
+    max-height: 150px;
+    max-width: 100%;
+}
+
+
+
 
