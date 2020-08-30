@@ -22,8 +22,9 @@ main = () => {
     let sum = 2;
     for(let i=0; i<=n; i++) {
         sum += (const13 * i); // sum = sum + (13 * i) where i = 0 to n
-        if(sum>=n) { return; }
-        console.log(sum);
+        if(sum < n) { 
+            console.log(sum);
+        }
     }
 }
 
