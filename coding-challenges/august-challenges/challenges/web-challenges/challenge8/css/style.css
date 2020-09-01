@@ -1,0 +1,33 @@
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background : black;
+}
+
+#outputDiv  {
+    margin: 50px auto;
+    width: 50%;
+    text-align: center;
+    padding: 30px;
+    color: #81b214;
+    border: 3px solid #81b214;
+    border-radius: 10px;;
+}
+
+.btnControls {
+    padding: 5px 10px;
+    border:none;
+    border-radius: 5px;
+    background: #81b214;
+    margin:20px;
+    cursor: pointer;
+    font-family:monospace;
+}
+
+.btnControls:hover {
+    background: #abec1d;
+}
+
+.btnControls:focus {
+    outline:none;
+}
