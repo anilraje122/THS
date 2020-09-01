@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Converter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <style>
+        #outputText {
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card m-5">
+                    <div class="card-header text-center bg-primary text-white myclass">
+                        <h4 class="mb-0">Binary Converter</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="text-primary">From</label>
+                                <select id="fromSel" class="form-control">
+                                    <option>Decimal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-primary">To</label>
+                                <select id="toSel" class="form-control">
+                                    <option>Binary</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-primary">Enter a Decimal Number : </label>
+                                <input id="inputText" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-primary">Binary Number : </label>
+                                <textarea id="outputText" class="form-control" disabled ></textarea>
+                            </div>
+                            <buton class="btn btn-primary btn-block" onclick="updateOutput();">Convert</buton>
+                            <buton class="btn btn-danger btn-block" onclick="clearInputOutput();">Clear</buton>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</body>
+<script src="./binary-converter.js"></script>
+</html>
