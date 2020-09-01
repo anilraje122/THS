@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color:#00bcd4;
+    background: black;
+}
+#outputDiv {
+    margin: 60px auto;
+    width: 50%;
+    text-align: center;
+    padding:10px;
+}
+#outputDiv h2 {
+    margin-bottom: 70px;
+}
+#outputDiv label {
+    display: block;
+    margin-bottom: 15px;
+    color:white;
+}
+#outputDiv input {
+    border:none;
+    height:25px;
+    width: 200px;
+    border-radius: 3px;;
+}
+#output {
+    height: 50px;
+    color: white;
+    padding: 10px;
+}
+#btnSubmit {
+    padding: 5px 10px;
+    border:none;
+    border-radius: 5px;
+    background: #00bcd4;
+    margin:20px;
+    cursor: pointer;
+    font-family:monospace;
+}
+#btnSubmit:hover {
+    background: #00bcd4;
+}
+#btnSubmit:focus {
+    outline:none;
+}
