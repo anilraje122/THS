@@ -79,7 +79,7 @@ p {
 /* Landing page styling */
 #landingpage {
     background: url('../images/cover.jpg') no-repeat center center/cover;
-    height: 400px;
+    height: 700px;
 }
 
 #landingpage .landingpage-content {
