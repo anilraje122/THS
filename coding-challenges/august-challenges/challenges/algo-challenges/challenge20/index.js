@@ -8,6 +8,8 @@ and multiplication operators. (NO * +)
 3. If it is not multiple of 10, Multiply given input with number 8 without using addition
 and multiplication operators. (NO * +)
 
+(Hint : Left Shift operator )
+
 Sample Input 1: 5
 Sample Output 1: 50
 

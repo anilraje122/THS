@@ -17,7 +17,8 @@
     "challenge16": "node challenges/algo-challenges/challenge16/index.js",
     "challenge17": "node challenges/algo-challenges/challenge17/index.js",
     "challenge18": "node challenges/algo-challenges/challenge18/index.js",
-    "challenge20": "node challenges/algo-challenges/challenge20/index.js"
+    "challenge20": "node challenges/algo-challenges/challenge20/index.js",
+    "challenge23": "node challenges/algo-challenges/challenge23/index.js"
   },
   "author": "",
   "license": "ISC",
