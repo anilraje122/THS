@@ -6,6 +6,10 @@
 } */
 
 /* navbar */
+#navbar .container {
+    padding:0;
+    margin:0;
+}
 #navbar .logo {
     float: none;
     text-align: center;
@@ -15,16 +19,34 @@
     float: none;
 }
 
-#navbar ul li a {
-    padding: 5px;
-    border-bottom: 1px solid #444;
+#navbar ul {
+    width: 100%;
 }
 
-/* Cpmpany info */
-/* #info-content .btn {
-    display: inline-block;
+#navbar ul li a {
+    margin: 10px 10px;
+    padding: 5px;
+    border-radius: 5px;
+    
+}
+
+/* Landing page */
+
+#landingpage {
+    background: url('../images/cover.jpg') no-repeat center center/cover;
+}
+
+#landingpage * {
+    margin-bottom: 30px;;
+}
+
+#landingpage .landingpage-content {
+    color: white;
     text-align: center;
-} */
+    padding-top: 270px;
+}
+
+/* Company info */
 
 #company-info .info-img {
     display: none;
@@ -34,6 +56,8 @@
     float: none;
     text-align: justify;
     width: 100%;
+    padding: 50px 15px;
+    text-align:center;
 }
 
 #company-info .info-content h2 {
@@ -46,4 +70,42 @@
     float:none;
     width: 100%
 }
+
+/* About us page */
+
+/* about section */
+
+#about-info {
+    padding: 20px 10px;
+    text-align: center;
+    width: 100%;
+}
+
+#about-info .info-left {
+    float: none;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+#about-info .info-right {
+    float: none;
+    width: 100%;
+}
+
+#about-info .info-right img {
+    margin: auto;
+    display: block;
+    width: 100%;
+}
+
+#testimonials {
+    text-align: center;
+}
+
+/* Contac us page */
+
+#contact-form {
+    height:100vh;
+}
+
 
