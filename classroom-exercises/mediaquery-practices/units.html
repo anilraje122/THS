@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Units</title>
+    <style>
+
+        /* While em is relative to the font size of its direct or nearest parent, rem is only relative to the html (root) */
+        
+        #tile1 h1 {
+            font-size: 20px;
+        }
+        #tile1 p {
+            font-size: 2em;
+        }
+
+        #tile2 {
+            font-size: 4rem;
+        }
+
+        #tile2 p {
+            /* font-size: 2rem; */
+            font-size: 200%;
+        }
+    </style>
+</head>
+<body>
+    <div id="tile1">
+        <h1>Tile 1</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque eius libero quam tenetur, eos dolor accusamus ab. Ipsam, rem architecto.</p>
+    </div>
+
+
+    <div id="tile2">
+        <h1>Tile 2</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque eius libero quam tenetur, eos dolor accusamus ab. Ipsam, rem architecto.</p>
+    </div>
+
+
+</body>
+</html>
