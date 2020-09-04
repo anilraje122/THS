@@ -11,8 +11,8 @@
 <body onload="clockDisplay();">
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
                 <div class="card bg-dark text-white mt-5 bordered border-warning">
                     <div class="card-header text-center fs-5 text-warning">ALARM</div>
                     <div class=" text-center fs-3" id="outputTime">
@@ -43,14 +43,14 @@
                             </div>
                         </div>
                         <button class="btn btn-block btn-success" onclick="alarm();">Set Alarm</button>
-                        <button class="btn btn-block btn-danger">Clear Alarms</button>
+                        <button class="btn btn-block btn-danger" onclick="stopAlarm();">Clear/Stop Alarm</button>
                     </div>
                 </div>
                 <audio id="alarmMusic">
                     <source src="./media/alarm.mp3" type="audio/mpeg"/>
                 </audio>
             </div>
-            <div class="col-md-4"></div>
+            <div class="col-md-3"></div>
         </div>
     </div>
 </body>

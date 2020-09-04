@@ -19,3 +19,7 @@ body {
     margin-top: 5px;
     display: block;
 }
+
+select {
+    margin-bottom: 10px;
+}

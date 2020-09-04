@@ -47,6 +47,8 @@ playStopAlarmMusic = (action) => {
     }
 }
 
+var interval;
+
 // Alarm logic goes here
 alarm = () => {
     let userSelHH;
@@ -58,19 +60,22 @@ alarm = () => {
         userSelHH = document.getElementById('timeSelectHH').value;
         userSelMM = document.getElementById('timeSelectMM').value;
         userSelAmPm = document.getElementById('timeSelectAmPm').value;
+        if(userSelHH === 'HH' || userSelMM === 'MM') {
+            document.getElementById('outputMsgHead').innerText = 'Inavlid Time Selected!!';  
+            playStopAlarmMusic('stop');
+            return;
+        }
         document.getElementById('outputMsgHead').innerText = `Next Alarm : ${userSelHH}:${userSelMM} ${userSelAmPm}`;
-        console.log(userSelHH, userSelMM, userSelAmPm);
     }
     setAlarm();
 
     // Ring the alarm if the input matches with the current time
-    setInterval(function () {
+    interval = setInterval(function () {
         let d = new Date();
         let hh = d.getHours();
         let amPm = setAmPm(hh);
         hh = convert24to12(hh);
         let mm = d.getMinutes();
-        let ss = d.getSeconds();
         if(hh == userSelHH && mm == userSelMM && amPm == userSelAmPm) {
             document.getElementById('outputMsgBody').innerText = "Alarm Active! Ring Ring!!";
             playStopAlarmMusic('play');
@@ -80,7 +85,6 @@ alarm = () => {
         }
     }, 1000);       
 }
-
 
 // Clock display 
 clockDisplay = () => { 
@@ -94,4 +98,16 @@ clockDisplay = () => {
         let ss = d.getSeconds();
         document.getElementById('outputTime').innerText = `${paddZero(hh)} : ${paddZero(mm)} : ${paddZero(ss)} ${amPm}`;
     }, 1000);    
+}
+
+// Stop and reset alarm
+stopAlarm = () => {
+    clearInterval(interval);
+    playStopAlarmMusic('stop');
+    document.getElementById('outputMsgHead').innerHTML = '<i class="fas fa-alarm-clock mb-2 "></i> No Alarm Set!';
+    document.getElementById('outputMsgBody').innerText = "";
+    document.getElementById('timeSelectAmPm').selectedIndex = 0;
+    userSelHH = '';
+    userSelMM = '';
+    userSelAmPm = '';
 }
