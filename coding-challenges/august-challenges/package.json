@@ -18,7 +18,13 @@
     "challenge17": "node challenges/algo-challenges/challenge17/index.js",
     "challenge18": "node challenges/algo-challenges/challenge18/index.js",
     "challenge20": "node challenges/algo-challenges/challenge20/index.js",
-    "challenge23": "node challenges/algo-challenges/challenge23/index.js"
+    "challenge23": "node challenges/algo-challenges/challenge23/index.js",
+    "challenge2": "python3 -m http.server -d ./challenges/web-challenges/challenge2/",
+    "challenge4": "python3 -m http.server -d ./challenges/web-challenges/challenge4/",
+    "challenge8": "python3 -m http.server -d ./challenges/web-challenges/challenge8/",
+    "challenge9": "python3 -m http.server -d ./challenges/web-challenges/challenge9/",
+    "challenge11": "python3 -m http.server -d ./challenges/web-challenges/challenge11/",
+    "challenge19": "python3 -m http.server -d ./challenges/web-challenges/challenge19/"
   },
   "author": "",
   "license": "ISC",
