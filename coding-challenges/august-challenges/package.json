@@ -18,6 +18,7 @@
     "challenge17": "node challenges/algo-challenges/challenge17/index.js",
     "challenge18": "node challenges/algo-challenges/challenge18/index.js",
     "challenge20": "node challenges/algo-challenges/challenge20/index.js",
+    "challenge22": "node challenges/algo-challenges/challenge22/index.js",
     "challenge23": "node challenges/algo-challenges/challenge23/index.js",
     "challenge2": "python3 -m http.server -d ./challenges/web-challenges/challenge2/",
     "challenge4": "python3 -m http.server -d ./challenges/web-challenges/challenge4/",
