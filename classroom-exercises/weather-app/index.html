@@ -9,54 +9,52 @@
     <link rel="stylesheet" href="main.css"/>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <i class="fas fa-cloud-sun fa-3x"></i><h1>Weather App</h1>
-        </div>
-    </header>
-    <div class="container">
-        <div class="app-container">
-            <div class="search-bar">
-                <i class="fa fa-search" aria-hidden="true"></i>
-                <input id="inputCity" type="text" placeholder="Search city"/>
+    <div class="page-container">
+        <header>
+            <div class="container">
+                <i class="fas fa-cloud-sun fa-3x"></i><h1>Weather App</h1>
             </div>
-            <button id="btn" onclick="weatherApp();">Get Weather</button>
-            <div id="outputContainer">
-                <div class="outputCard">
-                   
-                    <div class="outputCardLeft">
-                        <div>
-                            Current Weather in 
+        </header>
+        <div class="container">
+            <div class="app-container">
+                <div class="search-bar">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <input id="inputCity" type="text" placeholder="Search city"/>
+                </div>
+                <button id="btn" onclick="weatherApp();">Get Weather</button>
+                <div id="outputContainer">
+                    <div class="outputCard">
+                        <div class="outputCardLeft">
+                            <div class="moreDetails">
+                                <span class="label" id="city">City</span>
+                            </div>
+                            <div class="moreDetails">
+                                <span class="label" id="temp">temp</span>
+                            </div>
+                            <div class="moreDetails">
+                                <span class="label" id="desc">description</span>
+                            </div>
+                            <div class="moreDetails">
+                                <span class="label" id="time">time</span>
+                            </div>
                         </div>
-                        <div class="moreDetails">
-                            <span class="label" id="city">City</span>
-                        </div>
-                        <div class="moreDetails">
-                            <span class="label" id="temp">temp</span>
-                        </div>
-                        <div class="moreDetails">
-                            <span class="label" id="desc">description</span>
-                        </div>
-                        <div class="moreDetails">
-                            <span class="label" id="time">time</span>
-                        </div>
-                    </div>
-                    <div class="outputCardRight">
-                        <div class="moreDetails">
-                            <span class="label">Feels Like</span>
-                            <span class="value" id="feelslike"></span>
-                        </div>
-                        <div class="moreDetails">
-                            <span class="label">Min Temp</span>
-                            <span class="value" id="minTemp"></span>
-                        </div>
-                        <div class="moreDetails">
-                            <span class="label">Max Temp</span>
-                            <span class="value" id="maxTemp"></span>
-                        </div>
-                        <div class="moreDetails">
-                            <span class="label">Humidity</span>
-                            <span class="value" id="humid"></span>
+                        <div class="outputCardRight">
+                            <div class="moreDetails">
+                                <span class="label">Feels Like</span>
+                                <span class="value" id="feelslike"></span>
+                            </div>
+                            <div class="moreDetails">
+                                <span class="label">Min Temp</span>
+                                <span class="value" id="minTemp"></span>
+                            </div>
+                            <div class="moreDetails">
+                                <span class="label">Max Temp</span>
+                                <span class="value" id="maxTemp"></span>
+                            </div>
+                            <div class="moreDetails">
+                                <span class="label">Humidity</span>
+                                <span class="value" id="humid"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,9 +80,9 @@
         const cityName = document.getElementById('inputCity').value;
         getCityWeather(cityName)
         .then((res)=> {
-            let d = new Date();
+            // clearHtmlElements();
+            const d = new Date();
             let curTime = `${d.getHours()}:${d.getMinutes()}`;
-            let curDate = 
             curTime = convertTime24to12(curTime);
             const temp = (res.data.main.temp - 273.15).toFixed(2) + "&#8451;";
             const desc = res.data.weather[0].description;
@@ -94,7 +92,7 @@
             const maxTemp = (res.data.main.temp_max - 273.15).toFixed(2) + "&#8451;";
             document.getElementById('outputContainer').style.display = "block";
             console.log(cityName, curTime, temp, desc, feelslike, minTemp, maxTemp, humidity);
-            document.getElementById('city').innerText = cityName;
+            document.getElementById('city').innerHTML = "<p>Current weather in </p><strong>"+ cityName.toUpperCase() +"</strong>";
             document.getElementById('time').innerText = curTime;
             document.getElementById('temp').innerHTML = temp;
             document.getElementById('desc').innerText = `${desc}`;
@@ -104,8 +102,8 @@
             document.getElementById('humid').innerText = humidity;
         })
         .catch((err)=> {
-            document.getElementById('outputContainer').innerText = "Error Occured!";
-            console.log(err);
+            window.alert("Error pccured. Invalid city name!!");
+            window.location.href = 'https://anilraj.space/weather-app/';
         })
     }
 
@@ -121,5 +119,20 @@
             return curTime + " AM";
         }
     }
+
+    clearHtmlElements = () => {
+        document.getElementById('outputContainer').style.display = "none";
+        document.getElementById('outputContainer').innerHTML = "";
+        document.getElementById('city').innerHTML = "";
+        document.getElementById('time').innerText = "";
+        document.getElementById('temp').innerHTML = "";
+        document.getElementById('desc').innerText = "";
+        document.getElementById('feelslike').innerHTML = "";
+        document.getElementById('minTemp').innerHTML = "";
+        document.getElementById('maxTemp').innerHTML = "";
+        document.getElementById('humid').innerText = "";
+    }
+
+    
 </script>
 </html>
