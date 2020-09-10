@@ -1,9 +1,9 @@
 /* common styles */
+
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    /* background: rgb(100, 100, 100); */
     background: black;
     color: white;
     display: flex;
@@ -24,7 +24,8 @@ body {
     text-align: center;
 }
 
-/* header style */
+/* header styles */
+
 header {
     background: rgb(0, 132, 150);
 }
@@ -40,6 +41,7 @@ header h1 {
 }
 
 /* app styles */
+
 .app-container {
     margin: auto;
     margin-top: 10%;
@@ -50,10 +52,8 @@ header h1 {
 .search-bar {
     margin:auto;
     width: 100%;
-    /* padding: 5px; */
     margin-bottom: 20px;;
     background: white;
-    /* background: green; */
     height: 35px;
     display: flex;
     align-items: center;
@@ -158,6 +158,8 @@ header h1 {
     text-align: left;
     text-transform: initial;
 }
+
+/* footer styles */
 
 footer {
     text-align: center;

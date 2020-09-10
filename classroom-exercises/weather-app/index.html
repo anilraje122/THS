@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+    <meta name="description" content="Weather App helps you to find current weather of a City">
+    <meta name="keywords" content="weather, weather api">
+    <meta property="og:title" content="Weather App">
+    <meta property="og:description" content="Weather App helps you to find current weather of a City">
+    <meta property="og:image" content="https://freepngimg.com/download/weather/23525-5-weather-free-download.png">
+    <meta property="og:url" content="https://anilraj.space/weather-app/">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="main.css"/>
+    <script type="text/javascript" src="config.js"></script>
 </head>
 <body>
     <div class="page-container">
@@ -19,7 +26,7 @@
             <div class="app-container">
                 <div class="search-bar">
                     <i class="fa fa-search" aria-hidden="true"></i>
-                    <input id="inputCity" type="text" placeholder="Search city"/>
+                    <input id="inputCity" type="text" placeholder="Search city" required/>
                 </div>
                 <button id="btn" onclick="weatherApp();">Get Weather</button>
                 <div id="outputContainer">
@@ -68,19 +75,21 @@
     </footer>
 </body>
 <script>
-    const apiKey = '4efbc48122728ba2934e037dec910a10';
-    const baseUrl = `http://api.openweathermap.org/data/2.5/weather?q=`;
 
+    const apiKey = config.API_KEY;
+    const baseUrl = config.BASE_URL;
+
+    // get weather details from openweathermap api
     const getCityWeather = (cityName) => {
         const fullUrl = `${baseUrl}${cityName}&appid=${apiKey}`
         return axios.get(fullUrl);
     }
 
+    // weather app function
     function weatherApp() {
         const cityName = document.getElementById('inputCity').value;
         getCityWeather(cityName)
         .then((res)=> {
-            // clearHtmlElements();
             const d = new Date();
             let curTime = `${d.getHours()}:${d.getMinutes()}`;
             curTime = convertTime24to12(curTime);
@@ -102,11 +111,12 @@
             document.getElementById('humid').innerText = humidity;
         })
         .catch((err)=> {
-            window.alert("Error pccured. Invalid city name!!");
+            window.alert("Error ccured. Invalid City Name!!");
             window.location.href = 'https://anilraj.space/weather-app/';
         })
     }
 
+    // converts time from 24hr to 12hr
     convertTime24to12 = (curTime) => {
         let hh = curTime.split(':')[0];
         if( hh == 12) {
@@ -120,19 +130,5 @@
         }
     }
 
-    clearHtmlElements = () => {
-        document.getElementById('outputContainer').style.display = "none";
-        document.getElementById('outputContainer').innerHTML = "";
-        document.getElementById('city').innerHTML = "";
-        document.getElementById('time').innerText = "";
-        document.getElementById('temp').innerHTML = "";
-        document.getElementById('desc').innerText = "";
-        document.getElementById('feelslike').innerHTML = "";
-        document.getElementById('minTemp').innerHTML = "";
-        document.getElementById('maxTemp').innerHTML = "";
-        document.getElementById('humid').innerText = "";
-    }
-
-    
 </script>
 </html>

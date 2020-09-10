@@ -35,6 +35,7 @@ function weatherApp() {
     .catch((err)=> {
         window.alert("Error ccured. Invalid City Name!!");
         window.location.href = 'https://anilraj.space/weather-app/';
+        // window.location.href = 'http://127.0.0.1:5500/index.html';
     })
 }
 
