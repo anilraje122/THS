@@ -1,0 +1,184 @@
+/* common styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    /* background: rgb(100, 100, 100); */
+    background: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+}
+
+/* header style */
+header {
+    background: rgb(0, 132, 150);
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+}
+
+header h1 {
+    font-size: 25px;
+}
+
+/* app styles */
+.app-container {
+    margin: auto;
+    margin-top: 200px;
+    width: 70%;
+    padding: 10px;
+}
+
+.search-bar {
+    margin:auto;
+    width: 70%;
+    padding: 5px;
+    margin-bottom: 20px;;
+    background: white;
+    /* background: green; */
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+#inputCity {
+    width: 100%;
+    height: 30px;
+    border: none;
+    font-size: 20px;
+}
+
+#inputCity:focus {
+    border: none;
+    outline: none;
+}
+
+.fa-search {
+    margin: 0 10px;
+    color: gray;
+}
+
+#btn, #btn:focus, #btn:active {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(0, 132, 150);
+    color:white;
+    outline: none;
+    cursor: pointer;
+}
+
+#btn:hover {
+    background: rgb(24, 160, 179);
+}
+
+#outputContainer {
+    display: none;
+}
+
+.outputCard {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    background: white;
+    border-radius: 5px;
+    padding: 0 40px;
+    padding-top:30px;
+    box-shadow: #008496 0px 0px 5px 5px;
+    color: black;
+}
+
+.outputCardLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex:1;
+}
+
+.outputCardRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 10px;
+}
+
+.outputCardRight .moreDetails {
+    border-bottom: 1px solid gray;
+    margin-bottom: 40px;
+}
+
+.moreDetails {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.moreDetails .label {
+    align-items: flex-start;
+}
+
+.moreDetails .value {
+    align-items: flex-end;
+}
+
+#temp {
+    font-size: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif ;
+}
+
+#city {
+    margin-top: 10px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left:0;
+    right:0;
+    font-size:11px;
+}
+
+/* media queries */
+
+@media only screen and (max-width:600px) {
+    .app-container {
+        margin: 0 auto;
+        width: 70%;
+        padding: 10px;
+    }
+    .outputCard {
+        flex-direction: column;
+    }
+    #temp {
+        font-size: 25px;
+    }
+    footer {
+        text-align: center;
+        position: relative;
+        bottom: 0;
+        left:0;
+        right:0;
+        font-size:11px;
+    }
+}
