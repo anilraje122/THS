@@ -3,9 +3,8 @@
 const readLineSync = require("readline-sync");
 const axios = require("axios");
 
-const apiKey = '4efbc48122728ba2934e037dec910a10';
-const baseUrl = `http://api.openweathermap.org/data/2.5/weather?q=`;
-// const baseUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+const apiKey = '676542e0e2787e92ab1a5bb46b709d01';
+const baseUrl = 'http://api.openweathermap.org/data/2.5/weather?q=';
 
 const getCityWeather = (cityName) => {
     const fullUrl = `${baseUrl}${cityName}&appid=${apiKey}`
@@ -13,7 +12,7 @@ const getCityWeather = (cityName) => {
 }
 
 function weatherApp() {
-    console.clear();
+    // console.clear();
     const cityName = readLineSync.question("\nEnter the city name : ");
     getCityWeather(cityName)
     .then((res)=> {
@@ -35,5 +34,7 @@ function weatherApp() {
 }
 
 weatherApp();
+
+
 
 
