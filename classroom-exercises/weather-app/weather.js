@@ -3,8 +3,8 @@
 const readLineSync = require("readline-sync");
 const axios = require("axios");
 
-const apiKey = '676542e0e2787e92ab1a5bb46b709d01';
-const baseUrl = 'http://api.openweathermap.org/data/2.5/weather?q=';
+const apiKey = config.API_KEY;
+const baseUrl = config.BASE_URL;
 
 const getCityWeather = (cityName) => {
     const fullUrl = `${baseUrl}${cityName}&appid=${apiKey}`
