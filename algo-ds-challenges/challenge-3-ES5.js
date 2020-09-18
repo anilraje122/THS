@@ -1,5 +1,6 @@
 
 // Write a program to decide given 'N' is Prime or not.
+// ES5
 
 function isPrime(num) {
     if(num <=1 ) {
