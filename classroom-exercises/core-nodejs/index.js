@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {  // req - request & res - respo
     // Get the body
     const decoder = new stringDecoder('utf-8');
     let buffer = '';
-    res.on('data', (data) => {
+    req.on('data', (data) => {
         buffer += decoder.write(data);
     });
     req.on('end', () => {
