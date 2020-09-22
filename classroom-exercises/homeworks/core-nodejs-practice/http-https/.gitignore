@@ -1,2 +1,3 @@
 # ignore bewlow files
 ssl-certs
+ssl-certs/*
