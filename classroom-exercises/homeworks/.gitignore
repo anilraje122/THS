@@ -1,0 +1,4 @@
+# ignore below files
+node_modules
+async-operations/node_modules
+async-operations/weather-app-v2/node_modules

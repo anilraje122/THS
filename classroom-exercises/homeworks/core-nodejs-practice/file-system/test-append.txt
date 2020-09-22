@@ -1,0 +1,6 @@
+This is an example of fs append
+Welcome to Node.js
+Welcome to Node.js
+Welcome to Node.js
+Welcome to Node.js
+Welcome to Node.js
