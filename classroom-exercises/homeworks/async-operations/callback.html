@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Back</title>
+    <script>
+        const posts = [
+            {title: "Post one", body: "This is post one"},
+            {title: "Post two", body: "This is post two"},
+            {title: "Post three", body: "This is post three"}
+        ];
+
+        const getPosts = () => {
+            let output = '';
+            setTimeout(() => {
+                posts.forEach((post, index) => {
+                    output += `<li> ${post.title} </li>`;
+                });
+                document.body.innerHTML = output;
+            }, 2000);
+        }
+
+        const addPost = (post, callback) => {
+            setTimeout(() => {
+                posts.push(post);
+                callback();
+            }, 5000);
+        }
+
+        getPosts();
+        addPost({title: "Post four", body: "This is post four"}, getPosts);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Data Process</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .container {
+            max-width: 300px;
+            margin: auto;
+            margin-top: 100px;
+            border: 1px solid #999;
+            padding: 20px;
+            padding-bottom: 35px;
+            box-shadow: 0px 0px 10px 1px gray;
+            border-radius: 5px;
+        }
+        .container .form-control {
+            padding-bottom: 20px;
+        }
+        .container form label {
+            display: block;
+        }
+        .container form input, .container form textarea {
+            display: block;
+            width: 100%;
+            padding:5px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3 class="text-center">Contact Us</h3>
+        <form action="app.js" method="GET">
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="form-control">
+                <label for="phone">Phone</label>
+                <input type="number" name="phone" id="phone">
+            </div>
+            <div class="form-control">
+                <label for="msg">Message</label>
+                <textarea id="msg" name="msg"></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </div>
+</body>
+</html>
