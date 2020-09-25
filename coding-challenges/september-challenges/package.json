@@ -1,0 +1,11 @@
+{
+  "name": "september-challenges",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "challenge1": "python3 -m http.server -d ./challenges/web-challenges/calendar/"
+  },
+  "author": "",
+  "license": "ISC"
+}
