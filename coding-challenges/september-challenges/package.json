@@ -4,8 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "challenge1": "python3 -m http.server -d ./challenges/web-challenges/calendar/"
+    "challenge1": "python3 -m http.server -d ./challenges/web-challenges/calendar/",
+    "challenge2": "python3 -m http.server -d ./challenges/web-challenges/tomorrows-date/",
+    "challenge3": "node ./challenges/algo-challenges/duck-number/app.js",
+    "challenge4": "node ./challenges/algo-challenges/leap-year/app.js",
+    "challenge5": "node ./challenges/algo-challenges/find-weekends/app.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "readline-sync": "^1.4.10"
+  }
 }
