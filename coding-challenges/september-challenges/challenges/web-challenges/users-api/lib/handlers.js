@@ -1,3 +1,4 @@
+const { baseDir } = require('./data');
 // Imports
 const _data = require('./data');
 const helpers = require('./helpers');
@@ -147,15 +148,9 @@ handlers._users.delete = (data, callback) => {
     }
 }
 
-
-
-
-
-
-
 // Response for NOT FOUND route
 handlers.notFound = (data, callback) => {
-    callback(404, { "Status": "Not Found" });
+    callback(404, {"Error": "<center></br></br><h2>Error 404 : Page Not Found</h2></center>"})
 }
 
 module.exports = handlers;

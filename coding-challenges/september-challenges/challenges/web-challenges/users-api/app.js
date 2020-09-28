@@ -5,7 +5,6 @@ const stringDecoder = require('string_decoder').StringDecoder;
 const helpers = require('./lib/helpers');
 const config = require('./config');
 const handlers = require('./lib/handlers');
-const { stat } = require('fs');
 
 // Create HTTP Server
 const httpServer = http.createServer((req, res) => {
@@ -40,11 +39,19 @@ const httpServer = http.createServer((req, res) => {
         // Route the request to the handler that we chosen
         chosenHandler (data, (statusCode, payload) => {
             statusCode = typeof (statusCode) == 'number' ? statusCode : 200;
-            payload = typeof (payload) == 'object' ? payload : {};
-            payloadString = JSON.stringify(payload);
-            res.setHeader('Content-Type', 'application/json');
-            res.writeHead(statusCode);
-            res.end(payloadString);
+            if(statusCode != 404) {
+                payload = typeof (payload) == 'object' ? payload : {};
+                payloadString = JSON.stringify(payload);
+                res.setHeader('Content-Type', 'application/json');
+                res.writeHead(statusCode);
+                res.end(payloadString);   
+            } else {
+                // 404 error handled
+                res.setHeader('Content-Type', 'text/html');
+                res.writeHead(statusCode);
+                res.write(payload.Error);
+                res.end();   
+            }
         });
     });
 });
