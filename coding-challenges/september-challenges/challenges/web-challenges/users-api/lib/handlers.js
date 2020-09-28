@@ -20,15 +20,18 @@ handlers._users = {};
 // POST method for /users
 // Required fileds : firstName, lastName, phone(unique), password, tosAgreement
 // Optional fields : None
-handlers._users.post = (data, callback) => {
+handlers._users.post = (data, callback) => {    
     // Get all fields from request body/payload
-    const firstName = typeof (data.payload.firstName) === 'string' && data.payload.firstName.trim().length > 0 ? data.payload.firstName.trim() : false;
-    const lastName = typeof (data.payload.lastName) === 'string' && data.payload.lastName.trim().length > 0 ? data.payload.lastName.trim() : false;
-    const phone = typeof (data.payload.phone) === 'string' && data.payload.phone.trim().length === 10 ? data.payload.phone.trim() : false;
-    const password = typeof (data.payload.password) === 'string' && data.payload.password.length >= 6 ? data.payload.password : false;
-    const tosAgreement = typeof (data.payload.tosAgreement) === 'boolean' && data.payload.tosAgreement === true ? true : false;
+    let {firstName, lastName, phone, email, password, tosAgreement} = data.payload;
+    
+    firstName = typeof (firstName) === 'string' && firstName.trim().length > 0 ? firstName.trim() : false;
+    lastName = typeof (lastName) === 'string' && lastName.trim().length > 0 ? lastName.trim() : false;
+    phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone.trim() : false;    
+    email = typeof (email) === 'string' && email.trim().length > 0 ? email.trim() : false;
+    password = typeof (password) === 'string' && password.length >= 6 ? password : false;
+    tosAgreement = typeof (tosAgreement) === 'boolean' && tosAgreement === true ? true : false;
 
-    if(firstName && lastName && phone && password && tosAgreement) {
+    if(firstName && lastName && phone && email && password && tosAgreement) {
         // Check if user already exist
         _data.read('users', phone, (err, data) => {
             if(err) {
@@ -36,9 +39,11 @@ handlers._users.post = (data, callback) => {
                 if(hashedPassword) {
                     // Create final user object
                     const userObject = {
+                        _id: helpers.getCurTimeStamp,
                         firstName,
                         lastName,
                         phone,
+                        email,
                         hashedPassword,
                         tosAgreement : true
                     }
@@ -67,7 +72,9 @@ handlers._users.post = (data, callback) => {
 // Optional fields : Rest of the fields 
 handlers._users.get = (data, callback) => {
     // Get required field from query params
-    const phone = typeof (data.queryStringObject.phone) === 'string' && data.queryStringObject.phone.trim().length === 10 ? data.queryStringObject.phone : false;
+    let {phone} = data.queryStringObject;
+
+    phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone : false;
     if(phone) {
         _data.read('users', phone, (err, data) => {
             if(!err && data) {
@@ -87,18 +94,23 @@ handlers._users.get = (data, callback) => {
 // Optional fields : Rest of the fields 
 handlers._users.put = (data, callback) => {
     // Get required field from request body
-    const phone = typeof (data.payload.phone) === 'string' && data.payload.phone.trim().length === 10 ? data.payload.phone.trim() : false;
+    let {phone} = data.payload;
+    phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone.trim() : false;
+
     // Optional field validation
-    const firstName = typeof (data.payload.firstName) === 'string' && data.payload.firstName.trim().length > 0 ? data.payload.firstName.trim() : false;
-    const lastName = typeof (data.payload.lastName) === 'string' && data.payload.lastName.trim().length > 0 ? data.payload.lastName.trim() : false;
-    const password = typeof (data.payload.password) === 'string' && data.payload.password.length >= 6 ? data.payload.password : false;
+    let {firstName, lastName, password} = data.payload;
+    firstName = typeof (firstName) === 'string' && firstName.trim().length > 0 ? firstName.trim() : false;
+    lastName = typeof (lastName) === 'string' && lastName.trim().length > 0 ? lastName.trim() : false;
+    email = typeof (email) === 'string' && email.trim().length > 0 ? email.trim() : false;
+    password = typeof (password) === 'string' && password.length >= 6 ? password : false;
     if(phone) {
-        if(firstName || lastName || password) {
+        if(firstName || lastName || email || password) {
             // Check if the user file exist
             _data.read('users', phone, (err, userData) => {
                 if(!err && userData) {  
                     if(firstName) { userData.firstName = firstName } 
                     if(lastName) { userData.lastName = lastName } 
+                    if(email) { userData.email = email }
                     if(password) { userData.hashedPassword = helpers.hash(password) }
                     // Store new data to exisiting user file
                     _data.update('users', phone, userData, (err) => {
@@ -127,7 +139,8 @@ handlers._users.put = (data, callback) => {
 // Optional fields : Rest of the fields
 handlers._users.delete = (data, callback) => {
     // Get required field from query params
-    const phone = typeof (data.queryStringObject.phone) === 'string' && data.queryStringObject.phone.trim().length === 10 ? data.queryStringObject.phone : false;
+    let {phone} = data.queryStringObject;
+    phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone : false;
     // Check if user exist
     if(phone) {
         _data.read('users', phone, (err, data) => {
@@ -153,4 +166,5 @@ handlers.notFound = (data, callback) => {
     callback(404, {"Error": "<center></br></br><h2>Error 404 : Page Not Found</h2></center>"})
 }
 
+// Export handlers object
 module.exports = handlers;
