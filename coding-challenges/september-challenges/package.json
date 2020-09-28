@@ -8,7 +8,8 @@
     "challenge2": "python3 -m http.server -d ./challenges/web-challenges/tomorrows-date/",
     "challenge3": "node ./challenges/algo-challenges/duck-number/app.js",
     "challenge4": "node ./challenges/algo-challenges/leap-year/app.js",
-    "challenge5": "node ./challenges/algo-challenges/find-weekends/app.js"
+    "challenge5": "node ./challenges/algo-challenges/find-weekends/app.js",
+    "challenge6": "node ./challenges/web-challenges/users-api/app.js"
   },
   "author": "",
   "license": "ISC",
