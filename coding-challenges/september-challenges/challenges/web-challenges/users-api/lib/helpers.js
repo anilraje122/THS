@@ -10,20 +10,26 @@ helpers.hash = (str) => {
     if (typeof (str) === 'string' && str.length > 0) {
         const hash = crypto.createHmac('sha256', config.hashingSecret).update(str).digest('hex');
         return hash;
-    } else {
-        return false;
-    }
+    } 
+    return false;
 }
 
 // Parse buffer to object
 helpers.parseJsonToObject = (str) => {
     try {
-        const obj = JSON.parse(str);
-        return obj;
+        return JSON.parse(str);
     } catch(err) {
         return {};
     }
 }
 
-// Export module object
+// Get current time stamp
+helpers.getCurTimeStamp = () => {
+    const d = new Date();
+    const date = d.toLocaleDateString().split('/').join('');
+    const time = d.getTime();
+    return `${date}-${time}`
+}
+
+// Export helpers object
 module.exports = helpers;
