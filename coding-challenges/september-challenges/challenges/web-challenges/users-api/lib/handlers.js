@@ -18,7 +18,7 @@ handlers.users = (data, callback) => {
 handlers._users = {};
 // POST method for /users
 // Required fileds : firstName, lastName, phone(unique), password, tosAgreement
-// Option field : None
+// Optional fields : None
 handlers._users.post = (data, callback) => {
     // Get all fields from request body/payload
     const firstName = typeof (data.payload.firstName) === 'string' && data.payload.firstName.trim().length > 0 ? data.payload.firstName.trim() : false;
@@ -61,6 +61,40 @@ handlers._users.post = (data, callback) => {
     }
 }
 
+// GET method for /users
+// Required fileds : phone(unique)
+// Optional fields : Rest of the fields 
+handlers._users.get = (data, callback) => {
+    // Get required field from request body/payload
+    const phone = typeof (data.queryStringObject.phone) === 'string' && data.queryStringObject.phone.trim().length === 10 ? data.queryStringObject.phone : false;
+    if(phone) {
+        _data.read('users', phone, (err, data) => {
+            if(!err && data) {
+                delete data.hashedPassword;
+                callback(200, data);
+            } else {
+                callback(400, {"Error": "There is no user available with this phone number"})
+            }
+        });
+    } else {
+        callback(400, {"Error": "Validation failed/Missing fields"})
+    }
+}
+
+// PUT method for /users
+// Required fileds : phone(unique)
+// Optional fields : Rest of the fields 
+
+
+
+
+
+
+
+
+
+
+// Response for NOT FOUND route
 handlers.notFound = (data, callback) => {
     callback(404, { "Status": "Not Found" });
 }
