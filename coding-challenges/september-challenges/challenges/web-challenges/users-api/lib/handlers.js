@@ -65,7 +65,7 @@ handlers._users.post = (data, callback) => {
 // Required fileds : phone(unique)
 // Optional fields : Rest of the fields 
 handlers._users.get = (data, callback) => {
-    // Get required field from request body/payload
+    // Get required field from query params
     const phone = typeof (data.queryStringObject.phone) === 'string' && data.queryStringObject.phone.trim().length === 10 ? data.queryStringObject.phone : false;
     if(phone) {
         _data.read('users', phone, (err, data) => {
@@ -84,9 +84,68 @@ handlers._users.get = (data, callback) => {
 // PUT method for /users
 // Required fileds : phone(unique)
 // Optional fields : Rest of the fields 
+handlers._users.put = (data, callback) => {
+    // Get required field from request body
+    const phone = typeof (data.payload.phone) === 'string' && data.payload.phone.trim().length === 10 ? data.payload.phone.trim() : false;
+    // Optional field validation
+    const firstName = typeof (data.payload.firstName) === 'string' && data.payload.firstName.trim().length > 0 ? data.payload.firstName.trim() : false;
+    const lastName = typeof (data.payload.lastName) === 'string' && data.payload.lastName.trim().length > 0 ? data.payload.lastName.trim() : false;
+    const password = typeof (data.payload.password) === 'string' && data.payload.password.length >= 6 ? data.payload.password : false;
+    if(phone) {
+        if(firstName || lastName || password) {
+            // Check if the user file exist
+            _data.read('users', phone, (err, userData) => {
+                if(!err && userData) {  
+                    if(firstName) { userData.firstName = firstName } 
+                    if(lastName) { userData.lastName = lastName } 
+                    if(password) { userData.hashedPassword = helpers.hash(password) }
+                    // Store new data to exisiting user file
+                    _data.update('users', phone, userData, (err) => {
+                        if(!err) {
+                            callback(200, {"Success": "User details updated"});
+                        } else {
+                            console.log(err);
+                            callback(500, {"Error": "Server error, Unable to update the details"});
+                        }
+                    });
+                } else {
+                    callback(400, {"Error": "Specified user does not exist"});
+                }
+            });
+        } else {    
+            callback(400, {"Error": "Missing fields to update"});
+        }
+    } else {
+        callback(400, {"Error": "Validation failed/Missing fields"});
+    }
+}
 
 
-
+// Delete method for /users
+// Required fileds : phone(unique)
+// Optional fields : Rest of the fields
+handlers._users.delete = (data, callback) => {
+    // Get required field from query params
+    const phone = typeof (data.queryStringObject.phone) === 'string' && data.queryStringObject.phone.trim().length === 10 ? data.queryStringObject.phone : false;
+    // Check if user exist
+    if(phone) {
+        _data.read('users', phone, (err, data) => {
+            if(!err && data) {
+                _data.delete('users', phone, (err) => {
+                    if(!err) {
+                        callback(200, {"Success": "User deleted successfully"});
+                    } else {
+                        callback(500, {"Error": "Server error, Could not delete user"});
+                    }
+                });
+            } else {
+                callback(400, {"Error": "Specified user does not exist"});
+            }
+        });
+    } else {
+        callback(400, {"Error": "Validation failed/Missing fields"});
+    }
+}
 
 
 
