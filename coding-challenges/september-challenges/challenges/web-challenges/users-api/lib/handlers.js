@@ -1,10 +1,131 @@
-const { baseDir } = require('./data');
 // Imports
 const _data = require('./data');
 const helpers = require('./helpers');
 
 // Global vars
 const handlers = {};
+
+// Router handler for /age
+handlers.age = (data, callback) => {
+    const acceptableMethods = ['get'];
+    if(acceptableMethods.indexOf(data.method) !== -1) {
+        handlers._age[data.method](data, callback);
+    } else {
+        callback(405, {'Error': 'Invalid HTTP method! Request Failed.'})
+    }
+}
+
+handlers._age = {}
+// GET method for /age
+// GET /age?phone=xxxxxxxx
+// Required fileds : phone(unique)
+// Optional fields : None
+handlers._age.get = (data, callback) => {
+    // Get required field from query params
+    let {phone} = data.queryStringObject;
+    phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone : false;
+    if(phone) {
+        _data.read('users', phone, (err, userData) => {
+            if(!err && userData) {
+                console.log(userData);
+                console.log(typeof userData);
+                callback(200, userData);
+            } else {
+                callback(400, {"Error": "There is no user available with this phone number"});
+            }
+        });
+    } else {
+        callback(400, {"Error": "Validation failed/Missing fields"});
+    }
+}
+
+// Router handler for /hobby
+handlers.hobby = (data, callback) => {
+    const acceptableMethods = ['put', 'delete'];
+    if(acceptableMethods.indexOf(data.method) !== -1) {
+        handlers._hobby[data.method](data, callback);
+    } else {
+        callback(405, {'Error': 'Invalid HTTP method! Request Failed.'});
+    }
+}
+
+handlers._hobby = {};
+// PUT method for /hobby
+// PUT /hobby?phone=983857894	
+// Required fileds : phone(unique) from query params and hobbies from payload(request body)
+// Optional fields : Rest of the fields 
+handlers._hobby.put = (data, callback) => {
+    // Get phone number from query params
+    let {phone} = data.queryStringObject;
+    // Get hobbies from payload/request body
+    let {hobbies} = data.payload;
+    phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone : false;
+    hobbies = typeof (hobbies) === 'object' && hobbies.length > 0 ? hobbies : false;    
+    // Add multiple hobbies to the User (Array of strings) : PUT /hobby?phone=983857894
+    if(phone) {
+        if(hobbies) {
+            // Check if the user file exist
+            _data.read('users', phone, (err, userData) => {
+                console.log(err);
+                if(!err && userData) {  
+                    if(hobbies) { userData.hobbies = hobbies };
+                    _data.update('users', phone, userData, (err) => {
+                        if(!err) {
+                            callback(200, {"Success": "Hobby list updated"});
+                        } else {
+                            console.log(err);
+                            callback(500, {"Error": "Server error, Unable to update hobby list"});
+                        }
+                    });
+                } else {
+                    callback(400, {"Error": "Specified user does not exist"});
+                }
+            });
+        } else {
+            callback(400, {"Error": "Missing fields to update"});
+        }
+    } else {
+        callback(400, {"Error": "Validation failed/Missing fields"});
+    }
+}
+
+// DELETE method for /hobby
+// DELETE /hobby/delete?phone=7899179779&hobby=<hobby name>
+// Required fileds : phone(unique) and hobby from query params
+// Optional fields : Rest of the fields 
+handlers._hobby.delete = (data, callback) => {
+    // Get required field from query params
+    let {phone, hobby} = data.queryStringObject;
+    phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone : false;
+    hobby = typeof (hobby) == 'string' && hobby.trim().length > 0 ? hobby : false;
+    // Check if user exist
+    if(phone && hobby) {
+        _data.read('users', phone, (err, userData) => {
+            if(!err && userData) {
+                // Check if hobby exist
+                if('hobbies' in userData && userData.hobbies.indexOf(hobby) !== -1) {
+                    // Remove hobby from hobbies object
+                    let updatedHobbies = helpers.removeItemArr(hobby, userData.hobbies);
+                    userData.hobbies = updatedHobbies;
+                    _data.update('users', phone, userData, (err) => {
+                        if(!err) {
+                            callback(200, {"Success": "Hobby removed"});
+                        } else {
+                            console.log(err);
+                            callback(500, {"Error": "Server error, Unable to remove Hobby"});
+                        }
+                    });
+                } else {
+                    callback(400, {"Error": "Given Hobby does not exist for the User specified"});
+                }
+            } else {
+                callback(400, {"Error": "Specified user does not exist"});
+            }
+        });
+    } else {
+        callback(400, {"Error": "Validation failed/Missing fields"});
+    }
+}
 
 // Router handler for /users
 handlers.users = (data, callback) => {
@@ -18,6 +139,7 @@ handlers.users = (data, callback) => {
 
 handlers._users = {};
 // POST method for /users
+// POST /users
 // Required fileds : firstName, lastName, phone(unique), password, tosAgreement
 // Optional fields : None
 handlers._users.post = (data, callback) => {    
@@ -36,10 +158,11 @@ handlers._users.post = (data, callback) => {
         _data.read('users', phone, (err, data) => {
             if(err) {
                 const hashedPassword = helpers.hash(password);
+                const _id = helpers.getCurTimeStamp();
                 if(hashedPassword) {
                     // Create final user object
                     const userObject = {
-                        _id: helpers.getCurTimeStamp,
+                        _id,
                         firstName,
                         lastName,
                         phone,
@@ -71,22 +194,34 @@ handlers._users.post = (data, callback) => {
 // Required fileds : phone(unique)
 // Optional fields : Rest of the fields 
 handlers._users.get = (data, callback) => {
-    // Get required field from query params
-    let {phone} = data.queryStringObject;
-
-    phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone : false;
-    if(phone) {
-        _data.read('users', phone, (err, data) => {
+    // Get all user's data in one response: GET /users
+    if(data.trimmedPath === 'users' && Object.keys(data.queryStringObject).length === 0) {
+        _data.readAllFiles('users', (err, data) => {
             if(!err && data) {
-                delete data.hashedPassword;
                 callback(200, data);
             } else {
-                callback(400, {"Error": "There is no user available with this phone number"})
-            }
+                callback(500, {"Error": "Server error, Unable to read all files"});
+            }        
         });
     } else {
-        callback(400, {"Error": "Validation failed/Missing fields"})
-    }
+        // Get individual user Data : GET /users?=phone=xxxxxxxx
+        // Get required field from query params
+        let {phone} = data.queryStringObject;
+        phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone : false;
+
+        if(phone) {
+            _data.read('users', phone, (err, data) => {
+                if(!err && data) {
+                    delete data.hashedPassword;
+                    callback(200, data);
+                } else {
+                    callback(400, {"Error": "There is no user available with this phone number"});
+                }
+            });
+        } else {
+            callback(400, {"Error": "Validation failed/Missing fields"});
+        }
+    }   
 }
 
 // PUT method for /users
@@ -98,7 +233,7 @@ handlers._users.put = (data, callback) => {
     phone = typeof (phone) === 'string' && phone.trim().length === 10 ? phone.trim() : false;
 
     // Optional field validation
-    let {firstName, lastName, password} = data.payload;
+    let {firstName, lastName, email, password} = data.payload;
     firstName = typeof (firstName) === 'string' && firstName.trim().length > 0 ? firstName.trim() : false;
     lastName = typeof (lastName) === 'string' && lastName.trim().length > 0 ? lastName.trim() : false;
     email = typeof (email) === 'string' && email.trim().length > 0 ? email.trim() : false;
@@ -108,10 +243,10 @@ handlers._users.put = (data, callback) => {
             // Check if the user file exist
             _data.read('users', phone, (err, userData) => {
                 if(!err && userData) {  
-                    if(firstName) { userData.firstName = firstName } 
-                    if(lastName) { userData.lastName = lastName } 
-                    if(email) { userData.email = email }
-                    if(password) { userData.hashedPassword = helpers.hash(password) }
+                    if(firstName) { userData.firstName = firstName }; 
+                    if(lastName) { userData.lastName = lastName }; 
+                    if(email) { userData.email = email };
+                    if(password) { userData.hashedPassword = helpers.hash(password) };
                     // Store new data to exisiting user file
                     _data.update('users', phone, userData, (err) => {
                         if(!err) {
@@ -163,7 +298,7 @@ handlers._users.delete = (data, callback) => {
 
 // Response for NOT FOUND route
 handlers.notFound = (data, callback) => {
-    callback(404, {"Error": "<center></br></br><h2>Error 404 : Page Not Found</h2></center>"})
+    callback(404, {"Error": "HTTP ERROR 404: Page Not Found"});
 }
 
 // Export handlers object

@@ -26,9 +26,25 @@ helpers.parseJsonToObject = (str) => {
 // Get current time stamp
 helpers.getCurTimeStamp = () => {
     const d = new Date();
-    const date = d.toLocaleDateString().split('/').join('');
+    const date = d.toLocaleDateString().split('/').join('-');
     const time = d.getTime();
     return `${date}-${time}`
+}
+
+// Find difference between two time stamps
+helpers.getTimDiff = (oldTs, newTs) => {
+    
+}
+
+// Remove an item from an array
+helpers.removeItemArr = (item, arr) => {
+    let newArr = [];
+    for(let i=0; i<arr.length; i++) {
+        if(arr[i] !== item) {
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
 }
 
 // Export helpers object

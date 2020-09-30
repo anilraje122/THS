@@ -62,8 +62,10 @@ httpServer.listen(config.httpPort, () => {
 
 // Implementing Router
 const router = {
-    'ping': handlers.ping,
-    'users': handlers.users
+    'users': handlers.users,
+    'hobby': handlers.hobby,
+    'hobby/delete': handlers.hobby,
+    'age': handlers.age
 }
 
 
