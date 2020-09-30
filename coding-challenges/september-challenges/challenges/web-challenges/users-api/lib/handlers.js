@@ -29,7 +29,13 @@ handlers._age.get = (data, callback) => {
             if(!err && userData) {
                 console.log(userData);
                 console.log(typeof userData);
-                callback(200, userData);
+                const age = helpers.getTimDiff(userData._id, Date.now());                
+                if(age) {
+                    callback(200, age);
+                } else {
+                    console.log(err);
+                    callback(500, {"Error": "Server error, Unable to retrieve age"})
+                }
             } else {
                 callback(400, {"Error": "There is no user available with this phone number"});
             }
@@ -158,7 +164,7 @@ handlers._users.post = (data, callback) => {
         _data.read('users', phone, (err, data) => {
             if(err) {
                 const hashedPassword = helpers.hash(password);
-                const _id = helpers.getCurTimeStamp();
+                const _id = Date.now(); // get current timestamp
                 if(hashedPassword) {
                     // Create final user object
                     const userObject = {
