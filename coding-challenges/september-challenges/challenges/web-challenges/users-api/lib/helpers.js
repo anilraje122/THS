@@ -23,17 +23,19 @@ helpers.parseJsonToObject = (str) => {
     }
 }
 
-// Get current time stamp
-helpers.getCurTimeStamp = () => {
-    const d = new Date();
-    const date = d.toLocaleDateString().split('/').join('-');
-    const time = d.getTime();
-    return `${date}-${time}`
-}
-
 // Find difference between two time stamps
 helpers.getTimDiff = (oldTs, newTs) => {
-    
+    // const newTs = Date.now();
+    let diff = {};
+    if(oldTs && newTs) {
+        diff.seconds = Math.floor((new Date(newTs) - new Date(oldTs))/1000);
+        diff.mins = Math.floor(diff.seconds/60);
+        diff.hours = Math.floor(diff.mins/60);
+        diff.days = Math.floor(diff.hours/24);
+        return diff;
+    } else {
+        return false;
+    }
 }
 
 // Remove an item from an array
