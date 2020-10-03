@@ -1,8 +1,8 @@
 const _data = require('./data');
 const helpers = require('./helpers');
+
 //Implementing Route Handlers
 const handlers = {};
-
 
 //Router Handlers for /users
 handlers.users = (data, callback) => {
@@ -17,15 +17,12 @@ handlers.users = (data, callback) => {
     }
 }
 
-
 handlers._users = {};
 //POST Method for /users
 //Required Data(Users Schema) from body : firstname,lastname,phone(unique),password,tosAgreement
 //OPtional Data : none
 handlers._users.post = (data, callback) => {
-
     let { firstName, lastName, phone, password, tosAgreement } = data.payload;
-
     //Implement validation, check all required fields are filled out
     firstName = typeof (firstName) === 'string' && firstName.trim().length > 0 ? firstName.trim() : false;
     lastName = typeof (lastName) === 'string' && lastName.trim().length > 0 ? lastName.trim() : false;
@@ -141,7 +138,6 @@ handlers._users.put = (data, callback) => {
 
 }
 
-
 // DELETE Method for /users
 //Required Data (params) : Phone Number
 //Optional Data : none
@@ -172,7 +168,6 @@ handlers._users.delete = (data, callback) => {
     }
 }
 
-
 handlers.ping = (data, callback) => {
     //Callback returns a http status code and a payload object
     callback(200, { 'success': 'You Just accessed /ping' });
@@ -181,6 +176,5 @@ handlers.ping = (data, callback) => {
 handlers.notFound = (data, callback) => {
     callback(404, { "Status": "Not Found" });
 }
-
 
 module.exports = handlers;
