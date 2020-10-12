@@ -1,0 +1,22 @@
+Sematic Versioning - https://semver.org/
+
+Install express : npm install express --save
+Install nodemon with dev dependancies : npm install nodemon --save-dev
+
+Why ~ and ^ used in package versions :
+    Eg: "nodemon": "^2.0.4"
+    ~ compatible with future patches
+    ^ compatible with future minor/patches
+        Reference :
+            https://stackoverflow.com/questions/22343224/whats-the-difference-between-tilde-and-caret-in-package-json#:~:text=npm%20checks%20and%20fixes%20the,fixed%2C%20matches%20any%20build%20number
+
+Get the latest version of any package : 
+    npm i express@latest --save (--save makes an entry in the package.json)
+
+Get outdates packag details : 
+    npm outdated
+
+How to seperate dev and prod env :
+    Run start script : npm start
+    Run dev script : npm run dev (check package.json for more details)
+
