@@ -1,7 +1,6 @@
-/*
- * This File contains whole global Config Variables
- *
- */
+/****
+This File contains whole global Config Variables
+*****/
 const environmentToExport = {
     'hashingSecret': 'qwertyPOIUYTR!123'
 };
