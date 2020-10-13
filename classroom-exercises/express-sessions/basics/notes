@@ -20,3 +20,8 @@ How to seperate dev and prod env :
     Run start script : npm start
     Run dev script : npm run dev (check package.json for more details)
 
+Middleware data flow : 
+
+    1. App Middleware (1, 2, 3)
+    2. Router Middleware (1, 2, 3)
+
