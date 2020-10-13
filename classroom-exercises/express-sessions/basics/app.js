@@ -1,36 +1,24 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// app.get('/', (req, res) => {
-//     res.send('this is /');
-// })
-
-// app.get('/home', (req, res) => {
-//     res.json({status: "Success. You are at /home (GET)"});
-// })
-
-// app.post('/users', (req, res) => {
-//     res.json({status: "Success, you are at /users (POST)"})
-// })
-
-// app.put('/users', (req, res) => {
-//     res.json({status: "Success, you are at /users (PUT)"})
-// })
-
-// app.delete('/users', (req, res) => {
-//     res.json({status: "Success, you are at /users (DELETE)"})
-// })
+// App middleware
+app.use(bodyParser.json());
 
 /* 
 client/request data : 
 1. router params
 2. query params
 3. req headers
-4. 
+4. body object
 5. 
 */
+
+app.get('/', (req, res) => {
+    res.send('this is /');
+})
 
 app.get('/users/:userid', (req, res) => {
     // router params
@@ -43,10 +31,17 @@ app.get('/users/:userid', (req, res) => {
     // req headers
     console.log(req.headers);
 
+    // req body
+    console.log(req.body);
+
+    // path
+    console.log(req.originalUrl);
+
     // end request
     res.end();
 })
 
+// Nested call backs
 app.get('/home', (req, res, next) => {
     console.log(req.query);
     console.log('Im hit 1');
@@ -62,6 +57,32 @@ app.get('/home', (req, res, next) => {
     res.send('Check console for query data');
 })
 
+
+// Seperate call backs
+const cb1 = (req, res, next) => {
+    console.log(req.query);
+    console.log('Im hit 1');
+    next();
+}
+
+const cb2 = (req, res, next) => {
+    console.log(req.query);
+    console.log('Im hit 2');
+    req.some_value = 10;
+    next();
+}
+
+const cb3 = (req, res) => {
+    console.log(req.query);
+    console.log('Im hit 3');
+    console.log(req.some_value);
+    res.send('Check console for query data');
+}
+
+app.get('/users', cb1, cb2, cb3);
+
+
+// Listen
 app.listen(port, ()=> {
     console.log(`Server listening on ${port}`);
 })
