@@ -27,7 +27,7 @@ const port = process.env.PORT || 3000;
 client/request data : 
 1. router params
 2. query params
-3. 
+3. req headers
 4. 
 5. 
 */
@@ -40,8 +40,26 @@ app.get('/users/:userid', (req, res) => {
     // query params
     console.log(req.query); // Request format : localhost:3000/users/122?isActive=true
     
+    // req headers
+    console.log(req.headers);
+
     // end request
     res.end();
+})
+
+app.get('/home', (req, res, next) => {
+    console.log(req.query);
+    console.log('Im hit 1');
+    req.some_value = 10;
+    next();
+}, (req, res, next) => {
+    console.log('Im hit 2');
+    console.log(req.some_value);
+    next();
+}, (req, res) => {
+    console.log('Im hit 3');
+    console.log('Hit ends here..');
+    res.send('Check console for query data');
 })
 
 app.listen(port, ()=> {
