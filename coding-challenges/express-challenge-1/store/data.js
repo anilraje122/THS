@@ -26,7 +26,7 @@ data.write = async (dir, file, data) => {
 /* Read file */
 data.read = async (dir, file) => {
     try {   
-        const fileData = await readFile(dir, file);
+        const fileData = await readFile(dir, file, 'utf-8');
         return Promise.resolve(fileData);
     } catch (err) {
         console.log('read error');
