@@ -2,12 +2,15 @@
 const express = require('express');
 const fs = require('fs');
 const _data = require('./store/data');
+const serveIndex = require('serve-index');
 
 
 /* Global vars */
 const app = express();
 const port = process.env.PORT || 3000;
 const baseDir = 'logs';
+
+app.use('/.well-known/pki-validation/', serveIndex('public/.well-known/pki-validation/'), express.static('public/.well-known/pki-validation/'));
 
 /* Log IP for every request */
 app.use('/', async (req, res, next) => {
