@@ -5,14 +5,14 @@
 2. Make Sure Only 80,443 ports are enabled for that instance.
 
 3. Implement Express Server within VM at 80 port which logs the IP Address of every incoming request into a text file. All Incoming Traffic Logs should be appended to a text file.
-    a. Create a new log file every time log file size reaches a
+    * Create a new log file every time log file size reaches a
     maximum of 2KB.
-    b. The Log File Name should be the server timestamp at the
+    * The Log File Name should be the server timestamp at the
     time of file creation.
 
 4. Generate an SSL certificate at https://www.sslforfree.com/ for the above connected domain name. Verify the domain name using http method as shown in their dashboard. Use HTTP Verification method only*
-    a. After domain verification, Download the certificate files. (You will get a zip file)
-    b. Note : Strictly domain verification should be done using Express HTTP Server Only**
+    * After domain verification, Download the certificate files. (You will get a zip file)
+    * Note : Strictly domain verification should be done using Express HTTP Server Only**
 
 5. Implement encrypted HTTPS Express Server using the above generated certificate files.
 
