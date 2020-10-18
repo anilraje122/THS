@@ -24,8 +24,12 @@ const httpServer = http.createServer(app);
 
 /* Redirect HTTP to HTTPS */
 // app.use(forceSSL);
-app.use('*', (req, res) => {
-    res.redirect('https://'+ req.headers.host + req.url);
+app.use('*', (req, res, next) => {
+    if(!req.secure) {
+        res.redirect('https://'+ req.hostname + ':' + httpsPort + req.url);
+    } else {
+        next();
+    }
 });
 
 /* Server static files under public folder */
