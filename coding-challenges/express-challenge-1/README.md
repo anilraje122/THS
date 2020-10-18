@@ -17,3 +17,7 @@
 5. Implement encrypted HTTPS Express Server using the above generated certificate files.
 
 6. Redirect all http(80 port) traffic automatically to https(443)
+
+# Solution
+
+Solution is hosted at Google cloud with address - https://anilraj.co.in/
