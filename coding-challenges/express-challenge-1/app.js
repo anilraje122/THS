@@ -4,15 +4,28 @@ const fs = require('fs');
 const _data = require('./store/data');
 const serveIndex = require('serve-index');
 const https = require('https');
+const http = require('http');
+const forceSSL = require('express-force-ssl');
 
 /* Global vars */
 const app = express();
-const port = process.env.PORT || 3000;
-const baseDir = 'logs';
+const httpPort = 80;
+const httpsPort = 443;
+// const httpPort = 3000;
+// const httpsPort = 3001;
+
+/* Read SSL cert and key */
 let key = fs.readFileSync('.ssl/private.key');
 let cert = fs.readFileSync('.ssl/certificate.crt');
 let ca = fs.readFileSync('.ssl/ca_bundle.crt');
-const server = https.createServer({key: key, cert: cert, ca: ca}, app);
+const options = { key, cert, ca }
+
+/* Create HTTPS server */
+const httpsServer = https.createServer(options, app);
+const httpServer = http.createServer(app);
+
+/* Redirect HTTP to HTTPS */
+app.use(forceSSL);
 
 /* Server static files under public folder */
 app.use('/.well-known/pki-validation/', serveIndex('public/.well-known/pki-validation/'), express.static('public/.well-known/pki-validation/'));
@@ -47,5 +60,6 @@ app.get('/', (req, res) => {
     res.send('hello world!');
 })
 
-/* HTTP server listening on port specified */
-server.listen(port, () => console.log(`Server listening on ${port}`));
+/* servers listening on port specified */
+httpServer.listen(httpPort, () => console.log(`HTTP Server listening on ${httpPort}`));
+httpsServer.listen(httpsPort, () => console.log(`HTTPS Server listening on ${httpsPort}`));
