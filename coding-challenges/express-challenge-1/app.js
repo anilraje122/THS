@@ -23,7 +23,10 @@ const httpsServer = https.createServer(options, app);
 const httpServer = http.createServer(app);
 
 /* Redirect HTTP to HTTPS */
-app.use(forceSSL);
+// app.use(forceSSL);
+app.use('*', (req, res) => {
+    res.redirect('https://'+ req.headers.host + req.url);
+});
 
 /* Server static files under public folder */
 app.use('/.well-known/pki-validation/', serveIndex('public/.well-known/pki-validation/'), express.static('public/.well-known/pki-validation/'));
