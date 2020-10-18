@@ -12,13 +12,12 @@ const appendFile = util.promisify(fs.appendFile);
 const stat = util.promisify(fs.stat);
 const baseDir = path.join(__dirname + '/..');
 
-/* Write new file */
+/* Write file */
 data.write = async (dir, file, data) => {
     try {
         await writeFile(`${baseDir}/${dir}/${file}.txt`, data + os.EOL);
         return Promise.resolve();
     } catch (err) {
-        console.log('write error');
         return Promise.reject(err);
     }
 }
@@ -29,7 +28,6 @@ data.read = async (dir, file) => {
         const fileData = await readFile(dir, file, 'utf-8');
         return Promise.resolve(fileData);
     } catch (err) {
-        console.log('read error');
         return Promise.reject(err);
     }
 }
@@ -40,7 +38,6 @@ data.update = async (dir, file, newData) => {
         await appendFile(`${baseDir}/${dir}/${file}.txt`, newData + os.EOL);
         return Promise.resolve();
     } catch (err) {
-        console.log('update error');
         return Promise.reject(err);
     }
 }
@@ -52,12 +49,11 @@ data.readStats = async (dir, file) => {
         const fileSizeBytes = parseFloat(fileStats.size);
         return Promise.resolve(fileSizeBytes);
     } catch (err) {
-        console.log('readstats error');
         return Promise.reject(err);
     }
 }
 
-/* Find and sort recent log files as per modified time */
+/* Find and sort log files as per modified time */
 data.orderRecentFiles = (dir) => {
     try {
         return fs.readdirSync(dir)
@@ -65,7 +61,6 @@ data.orderRecentFiles = (dir) => {
             .map(file => ({ file, mtime: fs.lstatSync(path.join(dir, file)).mtime }))
             .sort((a, b) => b.mtime.getTime() - a.mtime.getTime());
     } catch (err) {
-        // console.log(err);
         return [];
     }
     
@@ -77,7 +72,6 @@ data.getMostRecentFile = (dir) => {
         const files = data.orderRecentFiles(`${baseDir}/${dir}/`);
         return (files[0].file.replace('.txt',''));
     } catch (err) {
-        // console.log(err);
         return false;
     }
 };
