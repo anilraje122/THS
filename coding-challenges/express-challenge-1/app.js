@@ -9,8 +9,8 @@ const forceSSL = require('express-force-ssl');
 
 /* Global vars */
 const app = express();
-const httpPort = 3000;
-const httpsPort = 3001;
+const httpPort = process.env.HTTP_PORT || 80;
+const httpsPort = process.env.HTTPS_PORT || 443;
 
 /* Read SSL cert and key */
 let key = fs.readFileSync('.ssl/private.key');
