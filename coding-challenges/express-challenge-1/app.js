@@ -1,18 +1,16 @@
 /* Imports */
-const express = require('express');
 const fs = require('fs');
-const _data = require('./store/data');
-const serveIndex = require('serve-index');
-const https = require('https');
 const http = require('http');
+const https = require('https');
+const data = require('./store/data');
+const express = require('express');
+const serveIndex = require('serve-index');
 const forceSSL = require('express-force-ssl');
 
 /* Global vars */
 const app = express();
 const httpPort = 80;
 const httpsPort = 443;
-// const httpPort = 3000;
-// const httpsPort = 3001;
 
 /* Read SSL cert and key */
 let key = fs.readFileSync('.ssl/private.key');
@@ -20,7 +18,7 @@ let cert = fs.readFileSync('.ssl/certificate.crt');
 let ca = fs.readFileSync('.ssl/ca_bundle.crt');
 const options = { key, cert, ca }
 
-/* Create HTTPS server */
+/* Create HTTP and HTTPS servers */
 const httpsServer = https.createServer(options, app);
 const httpServer = http.createServer(app);
 
@@ -35,19 +33,19 @@ app.use('/', async (req, res, next) => {
     try {
         const curTimestamp = Date.now();
         const logData = `Server was accessed by ${req.ip}`;
-        const recentFile = _data.getMostRecentFile('logs');
+        const recentFile = data.getMostRecentFile('logs');
         // Update recent file if exist as per below condition
         if(recentFile) {
-            const recentFileSize = await _data.readStats('logs', recentFile);
+            const recentFileSize = await data.readStats('logs', recentFile);
             if(recentFileSize >= 2000) {
-                await _data.write('logs', curTimestamp, logData);
+                await data.write('logs', curTimestamp, logData);
                 next();
             } else {
-                await _data.update('logs', recentFile, logData);
+                await data.update('logs', recentFile, logData);
                 next();
             } 
         } else {
-            await _data.write('logs', curTimestamp, logData);
+            await data.write('logs', curTimestamp, logData);
             next();
         }  
     } catch(err){
