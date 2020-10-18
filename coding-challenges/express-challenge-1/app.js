@@ -9,8 +9,8 @@ const forceSSL = require('express-force-ssl');
 
 /* Global vars */
 const app = express();
-const httpPort = 80;
-const httpsPort = 443;
+const httpPort = 3000;
+const httpsPort = 3001;
 
 /* Read SSL cert and key */
 let key = fs.readFileSync('.ssl/private.key');
@@ -32,7 +32,7 @@ app.use('/.well-known/pki-validation/', serveIndex('public/.well-known/pki-valid
 app.use('/', async (req, res, next) => {
     try {
         const curTimestamp = Date.now();
-        const logData = `Server was accessed by ${req.ip}`;
+        const logData = `Server was accessed by ${req.ip} at ${new Date().toLocaleString()}`;
         const recentFile = data.getMostRecentFile('logs');
         // Update recent file if exist as per below condition
         if(recentFile) {
