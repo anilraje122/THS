@@ -33,7 +33,7 @@ app.use('*', (req, res, next) => {
 });
 
 /* Server static files under public folder */
-app.use('/.well-known/pki-validation/', serveIndex('public/.well-known/pki-validation/'), express.static('public/.well-known/pki-validation/'));
+app.use(serveIndex('public'), express.static('public'));
 
 /* Log IP for every request */
 app.use('/', async (req, res, next) => {
