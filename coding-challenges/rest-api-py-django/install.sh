@@ -1,5 +1,9 @@
 #! /bin/bash
 
+# install py virtenv
+apt-get update
+apt-get install python3-venv -y
+
 # add python virtual env
 python3 -m venv env
 
