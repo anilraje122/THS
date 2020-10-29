@@ -1,0 +1,44 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title XYZ Solutions - Login
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' integrity='sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://pro.fontawesome.com/releases/v5.10.0/css/all.css' integrity='sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p' crossorigin='anonymous')
+  body
+    .container
+      .row
+        .col-md-4
+        .col-md-4.mt-5
+          .card
+            h4.card-header.text-center Sign Up
+            .card-body
+              form(action='/users/dosignup' method='POST')
+                .form-group
+                  label(for='firstName') First Name
+                  input#firstName.form-control(type='text' name='firstName')
+                .form-group
+                  label(for='lastName') Last Name
+                  input#lastName.form-control(type='text' name='lastName')
+                .form-group
+                  label(for='email') Email
+                  input#email.form-control(type='email' name='email')
+                .form-group
+                  label.form-group(for='role') User Role
+                  select#role.form-control(name='role')
+                    option(value='') -- Choose --
+                    option(value='user') User
+                    option(value='admin') Admin
+                .form-group
+                  label(for='password') Password
+                  input#password.form-control(type='password' name='password')
+                .form-group
+                  label(for='password2') Confirm Password
+                  input#password2.form-control(type='password' name='password2')
+                .form-group
+                  a.text-center(href='http://localhost:3000/users/login') Already registered? Login here
+                .form-group.pt-1
+                  button.btn.btn-primary.btn-block(type='submit') Submit
+                  button.btn.btn-danger.btn-block(type='reset') Clear              
+        .col-md-4

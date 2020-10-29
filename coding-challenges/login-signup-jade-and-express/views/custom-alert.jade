@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title XYZ Solutions - Login
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' integrity='sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://pro.fontawesome.com/releases/v5.10.0/css/all.css' integrity='sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p' crossorigin='anonymous')
+  body
+    .container
+      .row
+        .col-md-2
+        .col-md-8.mt-5
+          div(class='alert #{customAlert.type}')
+            h4.alert-heading #{customAlert.title}
+            hr
+            p Status Code : #{customAlert.statusCode}
+            p Details : #{customAlert.message}
+          a(href='http://localhost:3000/users/signup' class='float-left') Go back to Signup
+          a(href='http://localhost:3000/users/login' class='float-right') Login here
+        .col-md-2
