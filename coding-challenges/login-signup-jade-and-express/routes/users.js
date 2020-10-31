@@ -10,10 +10,7 @@ const config = require("../config/default.json");
 const jwt = require("jsonwebtoken");
 const helper = require("../helper");
 
-// /* GET users root page */
-// router.all("/", function (req, res, next) {
-//   res.send("<h1>XYZ Solutions - Users Root Page</h1>");
-// });
+/* UI Routes */
 
 /* Users Login - UI */
 router.all("/login", (req, res) => {
@@ -25,7 +22,8 @@ router.all("/signup", (req, res) => {
   res.render("signup");
 });
 
-/* API's */
+
+/* API Routes */
 
 /* User sign up - API */
 router.all(
@@ -45,6 +43,8 @@ router.all(
     }),
   ],
   async (req, res) => {
+    
+    // Input validation
     const errors = validationResult(req);
     console.log(errors);
     if (!errors.isEmpty()) {
@@ -61,6 +61,8 @@ router.all(
       const { email, role } = req.body;
       const existingUser = await Users.findOne({ email: email });
       const existingAdmin = await Users.findOne({ email: email });
+      
+      // Check for existing user/admin
       if (existingUser || existingAdmin) {
         return res.render("custom-alert", {
           customAlert: {
@@ -121,6 +123,8 @@ router.all(
     body("password", "Enter a valid password").notEmpty(),
   ],
   async (req, res) => {
+
+    // Input validation
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.render("custom-alert", {
@@ -249,7 +253,7 @@ router.all("/doverify/:selectedRole/:token", async (req, res) => {
   }
 });
 
-/* Resend verification email */
+/* Resend verification email - API*/
 router.all("/resendverification/:selectedRole/:token", async (req, res) => {
   const {selectedRole, token} = req.params;
   let selectedUser = {};
