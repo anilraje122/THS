@@ -30,4 +30,4 @@ const adminSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Customer', adminSchema, 'customers')
+module.exports = mongoose.model('Admin', adminSchema, 'admins')
