@@ -15,7 +15,6 @@ auth = async (req, res, next) => {
     const bytes = AES.decrypt(token, config.JWT.SECRET);
     const originalToken = bytes.toString(enc.Utf8);
     const decoded = await jwt.verify(originalToken, config.JWT.SECRET);
-    console.log(decoded);
     // Attach decoded payload to request
     if (decoded.role === "customer") {
       req.customer = decoded;
