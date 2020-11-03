@@ -47,6 +47,36 @@ const customerProfileSchema = new Schema({
       type: String,
     },
   },
+  experience: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      company: {
+        type: String,
+        required: true,
+      },
+      location: {
+        type: String,
+        required: true,
+      },
+      from: {
+        type: String,
+        required: true,
+      },
+      to: {
+        type: String,
+      },
+      current: {
+        type: Boolean,
+        default: false,
+      },
+      description: {
+        type: String,
+      },
+    },
+  ],
 });
 
 module.exports = model(
