@@ -3,22 +3,27 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const randomstring = require("randomstring");
 const pug = require("pug");
-
-const router = Router();
+const sendMail = require("../../controller/mailController");
+const jwt = require("jsonwebtoken");
 const Customer = require("../../models/customer");
 const Admin = require("../../models/admin");
+const config = require("../../config/default.json");
+const { AES } = require("crypto-js");
+
+const router = Router();
 
 /* 
-Register new customer - POST
+Route : /api/customer/register
+Description : Register new customer
 Public Route
 */
 router.post(
   "/register",
   [
-    body("name", "Invalid name").isString(),
-    body("email", "Invalid email").isEmail(),
-    body("password", "Invalid password").isString(),
-    body("role", "Invalid role").isString(),
+    body("name", "Invalid name").isString().notEmpty(),
+    body("email", "Invalid email").isEmail().notEmpty(),
+    body("password", "Invalid password").isLength({ min: 6 }),
+    body("role", "Invalid role").isString().notEmpty(),
   ],
   async (req, res) => {
     // Input validation
@@ -29,7 +34,7 @@ router.post(
     try {
       let { name, email, password, role } = req.body;
       let customer = await Customer.findOne({ email });
-      let admin = await Customer.findOne({ email });
+      let admin = await Admin.findOne({ email });
       // Check if user already exist
       if (customer) {
         return res
@@ -43,8 +48,8 @@ router.post(
       }
       // Hash password
       const saltRounds = 10;
-      const salt = bcrypt.genSalt(saltRounds);
-      password = bcrypt.hash(password, salt);
+      const salt = await bcrypt.genSalt(saltRounds);
+      password = await bcrypt.hash(password, salt);
       // Generate email token and save customer data to database
       const emailToken = randomstring.generate();
       customer = new Customer({
@@ -62,9 +67,42 @@ router.post(
         name,
         verifyURL,
       });
-    } catch (err) {}
+      await sendMail(subject, email, html);
+      // Create JWT token for authentication
+      const payload = {
+        customer: customer._id,
+        role: customer.role,
+      };
+      const jwtToken = await jwt.sign(payload, config.JWT.SECRET);
+      const cipherToken = AES.encrypt(
+        jwtToken,
+        config.CRYPTO.SECRET_KEY
+      ).toString();
+      res.status(200).json({ token: cipherToken });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ Error: "Server Error" });
+    }
   }
 );
+
+/* 
+Route : /api/customer/verify
+Description : Verify email for customer
+Public Route
+*/
+router.get("/verify/:emailToken", async (req, res) => {
+  try {
+    const emailToken = req.params.emailToken;
+    const data = await Customer.findOneAndUpdate(
+      { emailToken },
+      { active: true }
+    );
+    res.send(`<h1>${data.email} is successfully verified</h1>`);
+  } catch (err) {
+    res.status(500).json({ Error: "Server Error" });
+  }
+});
 
 /* Exports */
 module.exports = router;
