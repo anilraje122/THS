@@ -1,4 +1,5 @@
 const express = require('express');
+const connectDB = require('./connect-db');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -6,6 +7,9 @@ const port = process.env.PORT || 3000;
 /* Import routers */
 const customerRouter = require('./routes/customer');
 const adminRouter = require('./routes/admin');
+
+/* Connect to database */
+connectDB();
 
 /* Add middlwares */
 app.use(express.json());
