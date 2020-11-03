@@ -3,7 +3,7 @@ const { verify } = require("jsonwebtoken");
 const { AES, enc } = require("crypto-js");
 
 const auth = async (req, res, next) => {
-  const token = req.header('auth-token');
+  const token = req.header('auth-user');
   if(!token) {
     return res.status(401).json({"Error": "Unauthorized! No access token in header"});
   }
@@ -17,6 +17,7 @@ const auth = async (req, res, next) => {
     } else {
       req.admin = decodedToken;
     }
+    next();
   } catch (err) {
     console.log(err);
     res.status(500).json({"Error": "Token expired. Login again!"});

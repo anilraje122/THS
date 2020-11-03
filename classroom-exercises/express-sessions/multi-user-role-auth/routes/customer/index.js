@@ -73,7 +73,7 @@ router.post(
         role: customer.role,
       };
       const token = await jwt.sign(payload, config.JWT.SECRET_KEY, {
-        expiresIn: 30,
+        expiresIn: 300,
       });
       const cipherToken = AES.encrypt(
         token,

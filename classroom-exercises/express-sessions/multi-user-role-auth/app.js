@@ -11,6 +11,7 @@ app.use(express.json());
 const customerRouter = require('./routes/customer');
 const adminRouter = require('./routes/admin');
 const authRouter = require('./routes/auth');
+const customerProfileRouter = require('./routes/customer/profile');
 
 /* Connect DB */
 connectDB();
@@ -19,6 +20,7 @@ connectDB();
 app.use('/api/customer', customerRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/customer/profile', customerProfileRouter);
 
 app.listen(port, () => console.log(`Server started on ${port}`));
 
