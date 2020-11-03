@@ -73,9 +73,9 @@ router.post(
         customer: customer._id,
         role: customer.role,
       };
-      const jwtToken = await jwt.sign(payload, config.JWT.SECRET);
+      const token = await jwt.sign(payload, config.JWT.SECRET);
       const cipherToken = AES.encrypt(
-        jwtToken,
+        token,
         config.CRYPTO.SECRET_KEY
       ).toString();
       res.status(200).json({ token: cipherToken });

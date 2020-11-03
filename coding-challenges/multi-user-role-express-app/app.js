@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 /* Import routers */
 const customerRouter = require('./routes/customer');
 const adminRouter = require('./routes/admin');
+const authRouter = require('./routes/auth');
 
 /* Connect to database */
 connectDB();
@@ -17,6 +18,7 @@ app.use(express.json());
 /* Add routers */
 app.use('/api/customer', customerRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/auth', authRouter);
 
 /* App listening on specified port */
 app.listen(port, () => console.log(`App listening on ${port}`));
