@@ -73,7 +73,9 @@ router.post(
         admin: admin._id,
         role: admin.role,
       };
-      const token = await jwt.sign(payload, config.JWT.SECRET);
+      const token = await jwt.sign(payload, config.JWT.SECRET, {
+        expiresIn: 60,
+      });
       const cipherToken = AES.encrypt(
         token,
         config.CRYPTO.SECRET_KEY
@@ -94,10 +96,7 @@ Public Route
 router.get("/verify/:emailToken", async (req, res) => {
   try {
     const emailToken = req.params.emailToken;
-    const data = await Admin.findOneAndUpdate(
-      { emailToken },
-      { active: true }
-    );
+    const data = await Admin.findOneAndUpdate({ emailToken }, { active: true });
     res.send(`<h1>${data.email} is successfully verified</h1>`);
   } catch (err) {
     res.status(500).json({ Error: "Server Error" });
