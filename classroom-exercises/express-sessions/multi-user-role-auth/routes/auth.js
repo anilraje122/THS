@@ -41,7 +41,7 @@ router.post(
           role: customer.role,
         };
         const token = await jwt.sign(payload, config.JWT.SECRET_KEY, {
-          expiresIn: 30,
+          expiresIn: 300,
         });
         const cipherToken = AES.encrypt(
           token,
@@ -59,7 +59,7 @@ router.post(
           role: admin.role,
         };
         const token = await jwt.sign(payload, config.JWT.SECRET_KEY, {
-          expiresIn: 30,
+          expiresIn: 300,
         });
         const cipherToken = AES.encrypt(
           token,
@@ -67,7 +67,7 @@ router.post(
         ).toString();
         return res.status(200).json({ token: cipherToken });
       } else {
-        res.status(400).json({"Error": "Invalid email address"});
+        res.status(400).json({ Error: "Invalid email address" });
       }
     } catch (err) {
       console.log(err);

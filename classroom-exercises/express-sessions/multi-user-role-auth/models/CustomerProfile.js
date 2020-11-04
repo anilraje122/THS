@@ -1,79 +1,87 @@
-const {model, Schema} = require("mongoose");
+const { model, Schema } = require("mongoose");
 
 const customerProfileSchema = new Schema({
   customer: {
     type: Schema.Types.ObjectId,
-    ref: 'Customer'
+    ref: "Customer",
   },
   address: {
-    type: String
+    type: String,
   },
   website: {
-    type: String
+    type: String,
   },
   location: {
-    type: String
+    type: String,
   },
   phone: {
-    type: String
-  },
-  company: {       // new fields
-    type: String
-  },
-  isOpen : {
     type: String,
-    default: false
+  },
+  company: {
+    // new fields
+    type: String,
+  },
+  isOpen: {
+    type: String,
+    default: false,
   },
   skills: {
     type: Array,
-    required: true
+    required: true,
   },
   bio: {
-    type: String
+    type: String,
   },
   social: {
     youtube: {
-      type: String
+      type: String,
     },
     twitter: {
-      type: String
+      type: String,
     },
     facebook: {
-      type: String
+      type: String,
     },
     linkedin: {
-      type: String
+      type: String,
     },
     instagram: {
-      type: String
-    }
+      type: String,
+    },
   },
-  experince: [
+  experience: [
     {
       title: {
         type: String,
-        required: true
+        required: true,
       },
       company: {
         type: String,
-        required: true
+        required: true,
       },
       location: {
-        type: String
+        type: String,
       },
       from: {
         type: Date,
-        required: true
+        required: true,
       },
       to: {
-        type: Date
+        type: Date,
       },
       current: {
         type: Boolean,
-        default: false
-      }
-    }
-  ]
+        default: false,
+      },
+      description: {
+        type: String,
+      },
+    },
+  ],
 });
 
-module.exports = model('CustomerProfile', customerProfileSchema, 'customer_profiles')
+module.exports = model(
+  "CustomerProfile",
+  customerProfileSchema,
+  "customer_profiles"
+);
