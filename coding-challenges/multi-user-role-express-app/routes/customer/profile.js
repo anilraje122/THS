@@ -11,68 +11,70 @@ Route : /api/customer/profile
 Description : Create customer profile
 Private Route
 */
-router.post(
-  "/",
-  authMiddleware,
-  [
-    body("address", "Invalid address").isString(),
-    body("website", "Invalid website").isString(),
-    body("location", "Invalid location").isString(),
-    body("phone", "Invalid phone").isString(),
-    body("company", "Invalid company").isString(),
-    body("skills", "Invalid skills").isArray(),
-    body("bio", "Invalid bio").isString(),
-  ],
-  async (req, res) => {
-    // Input validation
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    try {
-      // Get all inputs
-      const {
-        address,
-        website,
-        location,
-        phone,
-        company,
-        skills,
-        bio,
-      } = req.body;
-      // Check if the customer is active or not
-      const customer = await Customer.findById(req.customer.customer);
-      if (!customer.active) {
-        return res.status(400).json({ Error: "Email is not verified" });
-      }
-      //  Check if a profile already exist for the customer
-      const customerProfiles = await CustomerProfile.findOne({
-        customer: customer._id,
-      });
-      if (customerProfiles) {
-        return res
-          .status(400)
-          .json({ Error: "A profile already exist for this customer" });
-      }
-      // Create new customer profile model and save to database
-      const customerProfile = new CustomerProfile({
-        customer: req.customer.customer,
-        address,
-        website,
-        location,
-        phone,
-        company,
-        skills,
-        bio,
-      });
-      await customerProfile.save();
-      res.status(200).json({ customerProfile });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ Error: "Server Error" });
-    }
+router.post("/", authMiddleware, async (req, res) => {
+  // Input validation
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
-);
+  try {
+    // Get all inputs
+    let {
+      address,
+      website,
+      location,
+      phone,
+      skills,
+      bio,
+      youtube,
+      instagram,
+      linkedin,
+      twitter,
+      facebook,
+    } = req.body;
+
+    // Check if the customer is active or not
+    const customer = await Customer.findById(req.customer.customer);
+    if (!customer.active) {
+      return res.status(400).json({ Error: "Email is not verified" });
+    }
+
+    //  Check if a profile already exist for the customer
+    const existingCustomerProfile = await CustomerProfile.findOne({
+      customer: customer._id,
+    });
+    if (existingCustomerProfile) {
+      return res
+        .status(400)
+        .json({ Error: "A profile already exist for this customer" });
+    }
+
+    // Build customer profile object
+    let customerProfileObject = {};
+    customerProfileObject.customer = customer._id;
+    if (address) customerProfileObject.address = address;
+    if (website) customerProfileObject.website = website;
+    if (location) customerProfileObject.location = location;
+    if (phone) customerProfileObject.phone = phone;
+    let skillArray = skills.split(",").map((skill) => skill.trim());
+    if (skillArray.length > 0) customerProfileObject.skills = skillArray;
+    if (bio) customerProfileObject.bio = bio;
+    customerProfileObject.social = {};
+    if (youtube) customerProfileObject.social.youtube = youtube;
+    if (instagram) customerProfileObject.social.instagram = instagram;
+    if (linkedin) customerProfileObject.social.linkedin = linkedin;
+    if (twitter) customerProfileObject.social.twitter = twitter;
+    if (facebook) customerProfileObject.social.facebook = facebook;
+
+    // Create new customer profile model and save to database
+    const newCustomerProfile = new CustomerProfile(customerProfileObject);
+    await newCustomerProfile.save();
+    res.status(200).json({ newCustomerProfile });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ Error: "Server Error" });
+  }
+});
 
 /* 
 Route : /api/customer/profile
@@ -113,54 +115,51 @@ Route : /api/customer/profile/experience
 Description : Add experience to customer profile
 Private Route
 */
-router.post(
-  "/experience",
-  authMiddleware,
-  [
-    body("title", "Invalid title").notEmpty().isString(),
-    body("company", "Invalid company").notEmpty().isString(),
-    body("location", "Invalid location").notEmpty().isString(),
-    body("from", "Invalid from").notEmpty().isString(),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    try {
-      // Get all inputs
-      const { title, company, location, from } = req.body;
-      // check if basic customer profile exist
-      const customerProfile = await CustomerProfile.findOne({
-        customer: req.customer.customer,
-      });
-      if (!customerProfile) {
-        return res
-          .status(400)
-          .json({ Errors: "Customer profile does not exist" });
-      }
-      await CustomerProfile.findOneAndUpdate(
-        {
-          customer: req.customer.customer,
-        },
-        {
-          $push: {
-            experience: [
-              {
-                title,
-                company,
-                location,
-                from,
-              },
-            ],
-          },
-        }
-      );
-      res.status(200).json({ Success: "Experience is updated successfully" });
-    } catch (err) {
-      res.status(500).json({ Error: "Server Error" });
-    }
+router.put("/experience", authMiddleware, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
-);
+  try {
+    // Get all inputs
+    const {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description,
+    } = req.body;
+
+    // check if customer profile exist
+    const existingCustomerProfile = await CustomerProfile.findOne({
+      customer: req.customer.customer,
+    });
+    if (!existingCustomerProfile) {
+      return res
+        .status(400)
+        .json({ Errors: "Customer profile does not exist" });
+    }
+
+    // Build experience object
+    let expObject = {};
+    if (title) expObject.title = title;
+    if (company) expObject.company = company;
+    if (location) expObject.location = location;
+    if (from) expObject.from = from;
+    if (to) expObject.to = to;
+    if (current) expObject.current = current;
+    if (description) expObject.description = description;
+
+    // push experience to the customer profile model and save to database
+    existingCustomerProfile.experience.unshift(expObject);
+    await existingCustomerProfile.save();
+
+    res.status(200).json({ Success: "Experience added successfully" });
+  } catch (err) {
+    res.status(500).json({ Error: "Server Error" });
+  }
+});
 
 module.exports = router;

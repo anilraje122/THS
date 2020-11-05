@@ -7,8 +7,10 @@ const sendMail = require("../../controller/mailController");
 const jwt = require("jsonwebtoken");
 const Customer = require("../../models/customer");
 const Admin = require("../../models/admin");
+const CustomerProfile = require("../../models/customerProfile");
 const config = require("../../config/default.json");
 const { AES } = require("crypto-js");
+const authMiddleware = require("../../controller/authMiddleware");
 
 const router = Router();
 
@@ -104,6 +106,22 @@ router.get("/verify/:emailToken", async (req, res) => {
   } catch (err) {
     res.status(500).json({ Error: "Server Error" });
   }
+});
+
+/* 
+Route : /api/customer/delete
+Description : Delete customer account
+private Route
+*/
+router.delete("/delete", authMiddleware, async (req, res) => {
+  const customer = await Customer.findById(req.customer.customer);
+  console.log(req.customer.customer);
+  const customerProfile = await CustomerProfile.findOne({
+    customer: req.customer.customer,
+  });
+  // console.log(customer);
+  console.log(customerProfile);
+  res.send("end");
 });
 
 /* Exports */
