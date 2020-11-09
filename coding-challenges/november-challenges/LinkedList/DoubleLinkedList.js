@@ -20,6 +20,15 @@ class LinkedList {
     }
     this.head = newNode;
   }
+  addToTail(val) {
+    const newNode = new Node(this.tail, val, null);
+    if (this.tail) {
+      this.tail.next = newNode;
+    } else {
+      this.head = newNode;
+    }
+    this.tail = -newNode;
+  }
   removeHead() {
     if (!this.head) {
       return console.log("No nodes found");
