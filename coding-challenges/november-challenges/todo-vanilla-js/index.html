@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <style>
+      li {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row p-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 text-center">
+          <h2>Todo List</h2>
+          <!-- Input -->
+          <div class="d-flex justify-content-between">
+            <input
+              type="text"
+              name="task"
+              id="task"
+              class="form-control mt-4"
+            />
+            <input
+              type="submit"
+              id="addTask"
+              value="Add task"
+              class="btn btn-success btn-inline mt-4 ml-2"
+            />
+          </div>
+
+          <!-- Output list -->
+          <ul
+            id="todo-list"
+            class="d-flex flex-column-reverse list-group mt-4"
+          ></ul>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
