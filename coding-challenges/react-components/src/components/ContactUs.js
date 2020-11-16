@@ -19,21 +19,21 @@ class ContactUs extends Component {
 
               <form method="POST" className="mt-5">
                 <div className="form-group wow fadeInUp">
-                  <label for="name" className="fw-medium fg-grey">
+                  <label htmlFor="name" className="fw-medium fg-grey">
                     Fullname
                   </label>
                   <input type="text" className="form-control" id="name" />
                 </div>
 
                 <div className="form-group wow fadeInUp">
-                  <label for="email" className="fw-medium fg-grey">
+                  <label htmlFor="email" className="fw-medium fg-grey">
                     Email
                   </label>
                   <input type="text" className="form-control" id="email" />
                 </div>
 
                 <div className="form-group wow fadeInUp">
-                  <label for="message" className="fw-medium fg-grey">
+                  <label htmlFor="message" className="fw-medium fg-grey">
                     Message
                   </label>
                   <textarea
