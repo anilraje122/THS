@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 /* Functional Component */
 function Navbar({ title, icon }) {
   return (
     <nav className="navbar bg-primary">
-      <h1>
-        <i className={icon}></i> {title}
-      </h1>
+      <a href="/">
+        <h1>
+          <i className={icon}></i> {title}
+        </h1>
+      </a>
     </nav>
   );
 }
