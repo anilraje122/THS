@@ -1,9 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import UserItem from "./UserItem";
+import Loading from "./Loading";
+import PropTypes from "prop-types";
 
-class Users extends Component {
-  render() {
-    const users = this.props.users;
+function Users({ users, loading }) {
+  if (loading) {
+    return <Loading />;
+  } else {
     return (
       <div style={userStyle}>
         {users.map((user) => (
@@ -18,6 +21,11 @@ const userStyle = {
   display: "grid",
   gridTemplateColumns: "repeat(3,1fr)",
   gridGap: "1rem",
+};
+
+Users.propTypes = {
+  users: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default Users;

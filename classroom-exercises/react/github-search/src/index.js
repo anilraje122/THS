@@ -18,8 +18,8 @@ ReactDOM.render(<App />, document.getElementById("root"));
 3. Props and PropTypes
 
 4. State : 
-   a. getState
-   b. setState
+   a. getState()
+   b. setState()
 
 5. Looping Components
 
