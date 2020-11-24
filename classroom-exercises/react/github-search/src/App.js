@@ -5,6 +5,8 @@ import Users from "./components/Users";
 import axios from "axios";
 import Search from "./components/Search";
 import Alert from "./components/Alert";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import About from "./components/About";
 
 class App extends Component {
   state = {
@@ -63,20 +65,35 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar title="Github Search" />
-
-        <div className="container">
-          <Alert alert={this.state.alert} />
-          <Search
-            searchUsers={this.searchUsers}
-            clearUsers={this.clearUsers}
-            showClear={this.state.users.length > 0 ? true : false}
-            setAlert={this.setAlert}
-          />
-          <Users users={this.state.users} loading={this.state.loading} />
+      <Router>
+        <div>
+          <Navbar title="Github Search" />
+          <div className="container">
+            <Alert alert={this.state.alert} />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <>
+                    <Search
+                      searchUsers={this.searchUsers}
+                      clearUsers={this.clearUsers}
+                      showClear={this.state.users.length > 0 ? true : false}
+                      setAlert={this.setAlert}
+                    />
+                    <Users
+                      users={this.state.users}
+                      loading={this.state.loading}
+                    />
+                  </>
+                )}
+              />
+              <Route exact path="/about" render={() => <About />} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
