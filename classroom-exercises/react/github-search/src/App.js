@@ -7,12 +7,14 @@ import Search from "./components/Search";
 import Alert from "./components/Alert";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import About from "./components/About";
+import User from "./components/User";
 
 class App extends Component {
   state = {
     users: [],
     loading: false,
     alert: null,
+    user: {},
   };
 
   async componentDidMount() {
@@ -30,6 +32,7 @@ class App extends Component {
     }
   }
 
+  // Search for a username
   searchUsers = async (text) => {
     this.setState({
       loading: true,
@@ -49,6 +52,7 @@ class App extends Component {
     });
   };
 
+  // Show alert message
   setAlert = (msg, type) => {
     this.setState({
       alert: {
@@ -61,6 +65,18 @@ class App extends Component {
         alert: null,
       });
     }, 3000);
+  };
+
+  // Get single user data
+  getUser = async (username) => {
+    this.setState({
+      loading: true,
+    });
+    const res = await axios.get(`https://api.github.com/users/${username}`);
+    this.setState({
+      user: res.data,
+      loading: false,
+    });
   };
 
   render() {
@@ -90,6 +106,18 @@ class App extends Component {
                 )}
               />
               <Route exact path="/about" render={() => <About />} />
+              <Route
+                exact
+                path="/user/:login"
+                render={(props) => (
+                  <User
+                    {...props}
+                    getUser={this.getUser}
+                    user={this.state.user}
+                    loading={this.state.loading}
+                  />
+                )}
+              />
             </Switch>
           </div>
         </div>
