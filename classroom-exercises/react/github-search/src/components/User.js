@@ -109,9 +109,8 @@ export default class User extends Component {
           <div className="badge badge-primary" style={{ marginBottom: 20 }}>
             Public Gists: {public_gists}
           </div>
-
-          <Repos repos={this.props.repos} />
         </div>
+        <Repos repos={this.props.repos} />
       </>
     );
   }
