@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 /* Functional component */
 function UserItem(props) {
@@ -13,9 +14,9 @@ function UserItem(props) {
       />
       <h3>{login}</h3>
       <div>
-        <a href={html_url} className="btn btn-dark btn-sm">
+        <Link to={`/user/${login}`} className="btn btn-dark">
           Github Profile
-        </a>
+        </Link>
       </div>
     </div>
   );
