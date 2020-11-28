@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Users - Admin</title>
+    <style>
+      .container {
+        margin: auto;
+        width: 70%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1>Customer Tickets</h1>
+        <table border="1" style="border-collapse: collapse">
+          <thead>
+            <tr>
+              <td>Case ID</td>
+              <td>Created</td>
+              <td>Subject</td>
+              <td>Type</td>
+              <td>Severity</td>
+              <td>Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>123</td>
+              <td>Date & Time</td>
+              <td>Subject 1</td>
+              <td>Type 1</td>
+              <td>Severity 1</td>
+              <td>Status 1</td>
+            </tr>
+            <tr>
+              <td>123</td>
+              <td>Date & Time</td>
+              <td>Subject 1</td>
+              <td>Type 1</td>
+              <td>Severity 1</td>
+              <td>Status 1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>More info about a case - Model</h2>
+      <div class="model">
+        <form action="/action_page.php">
+          <fieldset>
+            <legend>Case Info</legend>
+            <label for="cid">Case ID</label>
+            <input type="text" name="cid" disabled value="1234" /><br /><br />
+            <label for="created">Created</label>
+            <input type="text" name="created" disabled /><br /><br />
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" disabled /><br /><br />
+            <label for="description">Description</label>
+            <textarea name="description">Description 1</textarea><br /><br />
+            <label for="type">Type</label>
+            <select name="type">
+              <option value="">-- Select Type --</option>
+              <option value="ti">Technical Issue</option>
+              <option value="fr">Feature Request</option>
+              <option value="sq">Sales Question</option>
+              <option value="sq">Sales Question</option>
+            </select>
+            <br /><br />
+            <label for="severity">Severity</label>
+            <select name="severity">
+              <option value="">-- Select Severity --</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="critical">Critical</option>
+            </select>
+            <br /><br />
+            <label for="status">Status</label>
+            <select name="status">
+              <option value="">-- Select Status --</option>
+              <option value="open">Open</option>
+              <option value="inprogress">In Progress</option>
+              <option value="close">Close</option>
+            </select>
+            <br /><br />
+            <input type="submit" value="Submit" />
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
