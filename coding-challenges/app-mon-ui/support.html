@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Mon - Support</title>
+    <style>
+      .container {
+        margin: auto;
+        width: 70%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="support-header">
+        <h1 class="text-center">Support Center</h1>
+        <p>
+          Each and every one of our customer care agents have a mission to
+          assist all your needs in order to help you with our application
+          related issues. Please raise a support case with detail description of
+          the issues. One of our customer care agent will reach out to you at
+          the earliest and try to fix the issue.
+        </p>
+      </div>
+      <div class="support-new-case">
+        <h2>Create New Case</h2>
+        <form action="/action_page.php">
+          <fieldset>
+            <legend>Create New Case Form</legend>
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" /><br /><br />
+            <label for="checkName">Check Name</label>
+            <input type="text" name="checkName" /><br /><br />
+            <label for="description">Description</label>
+            <textarea name="description"></textarea><br /><br />
+            <label for="type">Type</label>
+            <select name="type">
+              <option value="">-- Select Type --</option>
+              <option value="ti">Technical Issue</option>
+              <option value="fr">Feature Request</option>
+              <option value="sq">Sales Question</option>
+              <option value="sq">Sales Question</option>
+            </select>
+            <br /><br />
+            <label for="severity">Severity</label>
+            <select name="severity">
+              <option value="">-- Select Severity--</option>
+              <option value="ti">Low</option>
+              <option value="fr">Medium</option>
+              <option value="sq">High</option>
+              <option value="sq">Critical</option>
+            </select>
+            <br /><br />
+            <input type="submit" value="Submit" />
+          </fieldset>
+        </form>
+      </div>
+      <div class="support-recent-cases">
+        <h2>Recent Cases</h2>
+        <table border="1" style="border-collapse: collapse">
+          <thead>
+            <tr>
+              <td>Case ID</td>
+              <td>Check Name</td>
+              <td>Created</td>
+              <td>Subject</td>
+              <td>Description</td>
+              <td>Type</td>
+              <td>Severity</td>
+              <td>Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>123</td>
+              <td>Check Name 1</td>
+              <td>Date & Time</td>
+              <td>Subject 1</td>
+              <td>Description 1</td>
+              <td>Type 1</td>
+              <td>Severity 1</td>
+              <td>Status 1</td>
+            </tr>
+            <tr>
+              <td>123</td>
+              <td>Check Name 1</td>
+              <td>Date & Time</td>
+              <td>Subject 1</td>
+              <td>Description 1</td>
+              <td>Type 1</td>
+              <td>Severity 1</td>
+              <td>Status 1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
