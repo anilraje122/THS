@@ -1,5 +1,0 @@
-{
-  "DB": {
-    "URI": "mongodb+srv://anilraj:helloanilraj122@nodejs.x66ze.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority"
-  }
-}
