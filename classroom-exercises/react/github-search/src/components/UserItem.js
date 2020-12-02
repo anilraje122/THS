@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 /* Functional component */
 function UserItem(props) {
-  const { login, avatar_url, html_url } = props.user;
+  const { login, avatar_url } = props.user;
   return (
     <div className="card text-center">
       <img

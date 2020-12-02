@@ -1,30 +1,18 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-class Search extends Component {
-  static propTypes = {
-    searchUsers: PropTypes.func.isRequired,
-    clearUsers: PropTypes.func.isRequired,
-    showClear: PropTypes.bool.isRequired,
-    setAlert: PropTypes.func.isRequired,
+function Search({ searchUsers, showAlert, showClear, clearUsers }) {
+  const [text, setText] = useState("");
+
+  const onChange = (e) => {
+    setText(e.target.value);
   };
 
-  state = {
-    text: "",
-  };
-
-  onChange = (e) => {
-    console.log(e.target.value);
-    this.setState({
-      text: e.target.value,
-    });
-  };
-
-  onSubmit = (e) => {
-    if (!this.state.text) {
-      this.props.setAlert("Enter github username", "danger");
+  const onSubmit = (e) => {
+    if (!text) {
+      showAlert("Enter github username", "danger");
     } else {
-      this.props.searchUsers(this.state.text);
+      searchUsers(text);
       this.setState({
         text: "",
       });
@@ -33,35 +21,39 @@ class Search extends Component {
     e.preventDefault();
   };
 
-  render() {
-    const { showClear, clearUsers } = this.props;
-    return (
-      <div className="container">
-        <form className="form" onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            name="text"
-            placeholder="Search Github User"
-            value={this.state.text}
-            onChange={this.onChange}
-          ></input>
-          <input
-            type="submit"
-            value="Search"
-            className="btn btn-dark btn-block"
-          ></input>
-        </form>
-        {showClear && (
-          <input
-            type="submit"
-            value="Clear"
-            className="btn btn-danger btn-block"
-            onClick={clearUsers}
-          ></input>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div className="container">
+      <form className="form" onSubmit={onSubmit}>
+        <input
+          type="text"
+          name="text"
+          placeholder="Search Github User"
+          value={text}
+          onChange={onChange}
+        ></input>
+        <input
+          type="submit"
+          value="Search"
+          className="btn btn-dark btn-block"
+        ></input>
+      </form>
+      {showClear && (
+        <input
+          type="submit"
+          value="Clear"
+          className="btn btn-danger btn-block"
+          onClick={clearUsers}
+        ></input>
+      )}
+    </div>
+  );
 }
+
+Search.protoTypes = {
+  searchUsers: PropTypes.func.isRequired,
+  clearUsers: PropTypes.func.isRequired,
+  showClear: PropTypes.bool.isRequired,
+  showAlert: PropTypes.func.isRequired,
+};
 
 export default Search;

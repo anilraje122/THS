@@ -18,6 +18,12 @@ function Navbar({ title, icon }) {
         <li>
           <Link to="/about">About</Link>
         </li>
+        <li>
+          <Link to="/dummy">Dummy</Link>
+        </li>
+        <li>
+          <Link to="/dummyHooks">Dummy with Hooks</Link>
+        </li>
       </ul>
     </nav>
   );
