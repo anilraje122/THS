@@ -4,19 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>App Mon - Manage Users (Admin)</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      .container {
-        margin: auto;
-        width: 70%;
+      body {
+        font-family: "Roboto", sans-serif;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div>
-        <h1>Customer Tickets</h1>
-        <table border="1" style="border-collapse: collapse">
-          <thead>
+      <section id="customer-tickets">
+        <h1 class="text-center mt-4 mb-4">Customer Tickets</h1>
+        <table class="table table-striped mb-4">
+          <thead class="table-dark">
             <tr>
               <td>Case ID</td>
               <td>Created</td>
@@ -24,6 +46,7 @@
               <td>Type</td>
               <td>Severity</td>
               <td>Status</td>
+              <td>Action</td>
             </tr>
           </thead>
           <tbody>
@@ -34,6 +57,17 @@
               <td>Type 1</td>
               <td>Severity 1</td>
               <td>Status 1</td>
+              <td>
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#viewUpdateModel"
+                >
+                  View/Update
+                </button>
+              </td>
             </tr>
             <tr>
               <td>123</td>
@@ -42,53 +76,137 @@
               <td>Type 1</td>
               <td>Severity 1</td>
               <td>Status 1</td>
+              <td>
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#viewUpdateModel"
+                >
+                  View/Update
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
-      </div>
-      <h2>More info about a case - Model</h2>
-      <div class="model">
-        <form action="/action_page.php">
-          <fieldset>
-            <legend>Case Info</legend>
-            <label for="cid">Case ID</label>
-            <input type="text" name="cid" disabled value="1234" /><br /><br />
-            <label for="created">Created</label>
-            <input type="text" name="created" disabled /><br /><br />
-            <label for="subject">Subject</label>
-            <input type="text" name="subject" disabled /><br /><br />
-            <label for="description">Description</label>
-            <textarea name="description">Description 1</textarea><br /><br />
-            <label for="type">Type</label>
-            <select name="type">
-              <option value="">-- Select Type --</option>
-              <option value="ti">Technical Issue</option>
-              <option value="fr">Feature Request</option>
-              <option value="sq">Sales Question</option>
-              <option value="sq">Sales Question</option>
-            </select>
-            <br /><br />
-            <label for="severity">Severity</label>
-            <select name="severity">
-              <option value="">-- Select Severity --</option>
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="critical">Critical</option>
-            </select>
-            <br /><br />
-            <label for="status">Status</label>
-            <select name="status">
-              <option value="">-- Select Status --</option>
-              <option value="open">Open</option>
-              <option value="inprogress">In Progress</option>
-              <option value="close">Close</option>
-            </select>
-            <br /><br />
-            <input type="submit" value="Submit" />
-          </fieldset>
-        </form>
+      </section>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="viewUpdateModel"
+        tabindex="-1"
+        aria-labelledby="viewUpdateModelLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="viewUpdateModelLabel">
+                Case Details
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <form action="/action_page.php">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="cid">Case ID</label>
+                  <input
+                    type="text"
+                    name="cid"
+                    disabled
+                    value="1234"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="created">Created</label>
+                  <input
+                    type="text"
+                    name="created"
+                    disabled
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    disabled
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea name="description" class="form-control">
+Description 1</textarea
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="type">Type</label>
+                  <select name="type" class="form-control">
+                    <option value="">-- Select Type --</option>
+                    <option value="ti">Technical Issue</option>
+                    <option value="fr">Feature Request</option>
+                    <option value="sq">Sales Question</option>
+                    <option value="sq">Sales Question</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="severity">Severity</label>
+                  <select name="severity" class="form-control">
+                    <option value="">-- Select Severity --</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="critical">Critical</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="status">Status</label>
+                  <select name="status" class="form-control">
+                    <option value="">-- Select Status --</option>
+                    <option value="open">Open</option>
+                    <option value="inprogress">In Progress</option>
+                    <option value="close">Close</option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

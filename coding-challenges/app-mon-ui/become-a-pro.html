@@ -6,60 +6,140 @@
     <title>App Mon - Become a Pro</title>
     <link
       rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      .container {
-        margin: auto;
-        width: 70%;
+      body {
+        font-family: "Roboto", sans-serif;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div>
-        <h1><b>Pro</b> Membership Plan</h1>
+      <section id="header">
+        <h1 class="mt-4"><b>Pro</b> Membership Plan</h1>
         <hr />
-        <div>
-          <div style="float: left">
-            <h3>Plan Details</h3>
-            <ul>
-              <li>Upto 20 URL's</li>
-              <li>Upto 20 Protocols per URL</li>
-              <li>Actionable Customised Report</li>
-              <li>24/7 Support</li>
-              <li>Special Offers on New Features</li>
-              <li>Exclusive Community Support</li>
-            </ul>
+      </section>
+      <section id="payment">
+        <h3 class="my-4">Plan Details</h3>
+        <div class="row">
+          <div class="col-md-8">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>Upto 20 URL's</td>
+                </tr>
+                <tr>
+                  <td>Upto 20 Protocols per URL</td>
+                </tr>
+                <tr>
+                  <td>Actionable Customised Report</td>
+                </tr>
+                <tr>
+                  <td>24/7 Support</td>
+                </tr>
+                <tr>
+                  <td>Special Offers on New Features</td>
+                </tr>
+                <tr>
+                  <td>Exclusive Community Support</td>
+                </tr>
+              </tbody>
+            </table>
             <div>
-              <div>
-                <h3>Payment Support</h3>
+              <div class="row mb-2">
+                <div class="col-md-8">
+                  <h3>Payment Support</h3>
+                </div>
+                <div class="col-md-4 text-right">
+                  <i class="fa fa-cc-visa fa-2x"></i>
+                  <i class="fa fa-cc-mastercard fa-2x"></i>
+                  <i class="fa fa-cc-amex fa-2x"></i>
+                </div>
               </div>
-              <div>
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-amex"></i>
+              <div class="row mb-4">
+                <div class="col-md-12">
+                  <input
+                    type="text"
+                    name="cardNumber"
+                    placeholder="Card Number"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name on the Card"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-2">
+                  <input
+                    type="text"
+                    name="expire"
+                    placeholder="MM/YY"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-2">
+                  <input
+                    type="text"
+                    name="cvv"
+                    placeholder="CVV"
+                    class="form-control"
+                  />
+                </div>
               </div>
             </div>
-            <input type="text" name="cardNumber" placeholder="Card Number" />
-            <input type="text" name="name" placeholder="Name on the Card" />
-            <input type="text" name="expire" placeholder="MM/YY" />
-            <input type="text" name="cvv" placeholder="CVV" />
           </div>
-          <div style="float: right">
-            <div>
-              <h3>Summary (1 item)</h3>
-              <p>Sub Total : $29.59</p>
-              <p>Taxes : $29.59</p>
+          <div class="col-md-4">
+            <div class="card mb-4 p-3">
+              <h3 class="mb-3">Summary (1 item)</h3>
+              <div class="row mt-3">
+                <div class="col-md-9">Sub Total</div>
+                <div class="col-md-3">$29.59</div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-9">Taxes</div>
+                <div class="col-md-3">$29.59</div>
+              </div>
               <hr />
-              <p>Total : $59.59</p>
+              <div class="row mt-4">
+                <div class="col-md-9">Total</div>
+                <div class="col-md-3">$59.59</div>
+              </div>
+              <hr />
             </div>
-            <input type="submit" value="Complete Order" />
+            <input
+              type="submit"
+              value="Complete Order"
+              class="btn btn-dark btn-block"
+            />
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </body>
 </html>
