@@ -34,10 +34,10 @@ router.post(
       });
     }
     try {
-      let { password } = req.body;
+      let { password, email } = req.body;
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(password, salt);
-      const userData = await Users.findOne({ email });
+      const userData = await User.findOne({ email });
       if (userData) {
         return res.render("error", {
           message: "User already exist with same email",
@@ -51,6 +51,7 @@ router.post(
       await newUser.save();
       res.redirect("/users/login");
     } catch (err) {
+      console.log(err);
       res.render("error", {
         message: "Server Error",
         error: {
