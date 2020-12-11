@@ -20,12 +20,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Redirect http to https
-app.use(function (req, res, next) {
-  if (req.protocol === "http") {
-    res.redirect("https://" + req.headers.host);
-  }
-  next();
-});
+// app.use(function (req, res, next) {
+//   if (req.protocol === "http") {
+//     res.redirect("https://" + req.headers.host);
+//   }
+//   next();
+// });
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
